@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE2D6597280767C30012A4D8 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D6596280767C30012A4D8 /* TabBarController.swift */; };
+		CE2D6599280768690012A4D8 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D6598280768690012A4D8 /* FavouriteViewController.swift */; };
+		CE2D659D280769030012A4D8 /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D659C280769030012A4D8 /* ExerciseViewController.swift */; };
+		CE2D659F280769800012A4D8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D659E280769800012A4D8 /* SettingsViewController.swift */; };
+		CE2D65A128076B240012A4D8 /* TheoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D65A028076B240012A4D8 /* TheoryViewController.swift */; };
+		CE2D65A42807794E0012A4D8 /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = CE2D65A32807794E0012A4D8 /* PinLayout */; };
 		CE6DA43228061355003D1BFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DA43128061355003D1BFC /* AppDelegate.swift */; };
 		CE6DA43428061355003D1BFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DA43328061355003D1BFC /* SceneDelegate.swift */; };
 		CE6DA43628061355003D1BFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DA43528061355003D1BFC /* ViewController.swift */; };
@@ -16,6 +22,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE2D6596280767C30012A4D8 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		CE2D6598280768690012A4D8 /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
+		CE2D659C280769030012A4D8 /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
+		CE2D659E280769800012A4D8 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		CE2D65A028076B240012A4D8 /* TheoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheoryViewController.swift; sourceTree = "<group>"; };
 		CE6DA42E28061355003D1BFC /* EGEKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EGEKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE6DA43128061355003D1BFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE6DA43328061355003D1BFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE2D65A42807794E0012A4D8 /* PinLayout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +75,11 @@
 				CE6DA43A28061357003D1BFC /* Assets.xcassets */,
 				CE6DA43C28061357003D1BFC /* LaunchScreen.storyboard */,
 				CE6DA43F28061357003D1BFC /* Info.plist */,
+				CE2D6596280767C30012A4D8 /* TabBarController.swift */,
+				CE2D6598280768690012A4D8 /* FavouriteViewController.swift */,
+				CE2D659C280769030012A4D8 /* ExerciseViewController.swift */,
+				CE2D65A028076B240012A4D8 /* TheoryViewController.swift */,
+				CE2D659E280769800012A4D8 /* SettingsViewController.swift */,
 			);
 			path = EGEKit;
 			sourceTree = "<group>";
@@ -83,6 +100,9 @@
 			dependencies = (
 			);
 			name = EGEKit;
+			packageProductDependencies = (
+				CE2D65A32807794E0012A4D8 /* PinLayout */,
+			);
 			productName = EGEKit;
 			productReference = CE6DA42E28061355003D1BFC /* EGEKit.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +131,9 @@
 				Base,
 			);
 			mainGroup = CE6DA42528061355003D1BFC;
+			packageReferences = (
+				CE2D65A22807794E0012A4D8 /* XCRemoteSwiftPackageReference "PinLayout" */,
+			);
 			productRefGroup = CE6DA42F28061355003D1BFC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -139,8 +162,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE6DA43628061355003D1BFC /* ViewController.swift in Sources */,
+				CE2D6597280767C30012A4D8 /* TabBarController.swift in Sources */,
+				CE2D659F280769800012A4D8 /* SettingsViewController.swift in Sources */,
 				CE6DA43228061355003D1BFC /* AppDelegate.swift in Sources */,
+				CE2D6599280768690012A4D8 /* FavouriteViewController.swift in Sources */,
+				CE2D659D280769030012A4D8 /* ExerciseViewController.swift in Sources */,
 				CE6DA43428061355003D1BFC /* SceneDelegate.swift in Sources */,
+				CE2D65A128076B240012A4D8 /* TheoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +386,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CE2D65A22807794E0012A4D8 /* XCRemoteSwiftPackageReference "PinLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/layoutBox/PinLayout";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CE2D65A32807794E0012A4D8 /* PinLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE2D65A22807794E0012A4D8 /* XCRemoteSwiftPackageReference "PinLayout" */;
+			productName = PinLayout;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CE6DA42628061355003D1BFC /* Project object */;
 }
