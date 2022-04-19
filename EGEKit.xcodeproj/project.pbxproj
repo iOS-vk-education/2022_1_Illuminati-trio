@@ -19,6 +19,12 @@
 		CE6DA43928061355003D1BFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6DA43728061355003D1BFC /* Main.storyboard */; };
 		CE6DA43B28061357003D1BFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE6DA43A28061357003D1BFC /* Assets.xcassets */; };
 		CE6DA43E28061357003D1BFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6DA43C28061357003D1BFC /* LaunchScreen.storyboard */; };
+		CE8B74A1280ED718002E32A3 /* ExerciseDetViewCotroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B74A0280ED718002E32A3 /* ExerciseDetViewCotroller.swift */; };
+		CE8B74A9280EE512002E32A3 /* UIViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B74A7280EE512002E32A3 /* UIViewTableViewCell.swift */; };
+		CE8B74AA280EE512002E32A3 /* UIViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8B74A8280EE512002E32A3 /* UIViewTableViewCell.xib */; };
+		CEB339922809DF6D00476B97 /* HTMLKit in Frameworks */ = {isa = PBXBuildFile; productRef = CEB339912809DF6D00476B97 /* HTMLKit */; };
+		CEB33994280B431500476B97 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB33993280B431500476B97 /* NetworkManager.swift */; };
+		CEB33996280B608E00476B97 /* TheoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB33995280B608E00476B97 /* TheoryDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +41,11 @@
 		CE6DA43A28061357003D1BFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE6DA43D28061357003D1BFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE6DA43F28061357003D1BFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE8B74A0280ED718002E32A3 /* ExerciseDetViewCotroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetViewCotroller.swift; sourceTree = "<group>"; };
+		CE8B74A7280EE512002E32A3 /* UIViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewTableViewCell.swift; sourceTree = "<group>"; };
+		CE8B74A8280EE512002E32A3 /* UIViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIViewTableViewCell.xib; sourceTree = "<group>"; };
+		CEB33993280B431500476B97 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		CEB33995280B608E00476B97 /* TheoryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheoryDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEB339922809DF6D00476B97 /* HTMLKit in Frameworks */,
 				CE2D65A42807794E0012A4D8 /* PinLayout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,7 +90,12 @@
 				CE2D6596280767C30012A4D8 /* TabBarController.swift */,
 				CE2D6598280768690012A4D8 /* FavouriteViewController.swift */,
 				CE2D659C280769030012A4D8 /* ExerciseViewController.swift */,
+				CE8B74A0280ED718002E32A3 /* ExerciseDetViewCotroller.swift */,
+				CE8B74A7280EE512002E32A3 /* UIViewTableViewCell.swift */,
+				CE8B74A8280EE512002E32A3 /* UIViewTableViewCell.xib */,
 				CE2D65A028076B240012A4D8 /* TheoryViewController.swift */,
+				CEB33995280B608E00476B97 /* TheoryDetailsViewController.swift */,
+				CEB33993280B431500476B97 /* NetworkManager.swift */,
 				CE2D659E280769800012A4D8 /* SettingsViewController.swift */,
 			);
 			path = EGEKit;
@@ -102,6 +119,7 @@
 			name = EGEKit;
 			packageProductDependencies = (
 				CE2D65A32807794E0012A4D8 /* PinLayout */,
+				CEB339912809DF6D00476B97 /* HTMLKit */,
 			);
 			productName = EGEKit;
 			productReference = CE6DA42E28061355003D1BFC /* EGEKit.app */;
@@ -133,6 +151,7 @@
 			mainGroup = CE6DA42528061355003D1BFC;
 			packageReferences = (
 				CE2D65A22807794E0012A4D8 /* XCRemoteSwiftPackageReference "PinLayout" */,
+				CEB339902809DF6D00476B97 /* XCRemoteSwiftPackageReference "HTMLKit" */,
 			);
 			productRefGroup = CE6DA42F28061355003D1BFC /* Products */;
 			projectDirPath = "";
@@ -148,6 +167,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE8B74AA280EE512002E32A3 /* UIViewTableViewCell.xib in Resources */,
 				CE6DA43E28061357003D1BFC /* LaunchScreen.storyboard in Resources */,
 				CE6DA43B28061357003D1BFC /* Assets.xcassets in Resources */,
 				CE6DA43928061355003D1BFC /* Main.storyboard in Resources */,
@@ -161,12 +181,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE8B74A9280EE512002E32A3 /* UIViewTableViewCell.swift in Sources */,
 				CE6DA43628061355003D1BFC /* ViewController.swift in Sources */,
+				CEB33994280B431500476B97 /* NetworkManager.swift in Sources */,
 				CE2D6597280767C30012A4D8 /* TabBarController.swift in Sources */,
 				CE2D659F280769800012A4D8 /* SettingsViewController.swift in Sources */,
 				CE6DA43228061355003D1BFC /* AppDelegate.swift in Sources */,
+				CE8B74A1280ED718002E32A3 /* ExerciseDetViewCotroller.swift in Sources */,
 				CE2D6599280768690012A4D8 /* FavouriteViewController.swift in Sources */,
 				CE2D659D280769030012A4D8 /* ExerciseViewController.swift in Sources */,
+				CEB33996280B608E00476B97 /* TheoryDetailsViewController.swift in Sources */,
 				CE6DA43428061355003D1BFC /* SceneDelegate.swift in Sources */,
 				CE2D65A128076B240012A4D8 /* TheoryViewController.swift in Sources */,
 			);
@@ -396,6 +420,14 @@
 				kind = branch;
 			};
 		};
+		CEB339902809DF6D00476B97 /* XCRemoteSwiftPackageReference "HTMLKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/iabudiab/HTMLKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -403,6 +435,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE2D65A22807794E0012A4D8 /* XCRemoteSwiftPackageReference "PinLayout" */;
 			productName = PinLayout;
+		};
+		CEB339912809DF6D00476B97 /* HTMLKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEB339902809DF6D00476B97 /* XCRemoteSwiftPackageReference "HTMLKit" */;
+			productName = HTMLKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
