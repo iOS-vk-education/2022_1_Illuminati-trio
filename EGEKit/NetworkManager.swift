@@ -7,7 +7,6 @@
 
 import Foundation
 import HTMLKit
-import SwiftSoup
 
 struct Theory {
     let name: String

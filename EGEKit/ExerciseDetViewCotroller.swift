@@ -90,14 +90,6 @@ class ExerciseDetViewController: UIViewController {
 
 extension ExerciseDetViewController: UITableViewDelegate, UITableViewDataSource {
     
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.row == 0 {
-//            return 44
-//        }
-//        else {
-//            return 80
-//        }
-//    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
@@ -138,7 +130,6 @@ extension ExerciseDetViewController: UITableViewDelegate, UITableViewDataSource 
             webView.pageZoom = 3
             webView.loadHTMLString(ExpCells[indexPath.section].options, baseURL: .none)
             
-
         }
         
         return cell
@@ -151,7 +142,14 @@ extension ExerciseDetViewController: UITableViewDelegate, UITableViewDataSource 
             ExpCells[indexPath.section].isOpened = !ExpCells[indexPath.section].isOpened
             tableView.reloadSections([indexPath.section], with: .none)
         } else {
-
+            
+            let viewC = DetailsViewController(htmlString: ExpCells[indexPath.section].options,
+                                              name: "Задача № \(ExerciseNumbers[indexPath.section])")
+//            let navC = UINavigationController(rootViewController: viewC)
+            
+//            present(navC, animated: true, completion: nil)
+            navigationController?.pushViewController(viewC, animated: true)
+            
         }
     }
     
