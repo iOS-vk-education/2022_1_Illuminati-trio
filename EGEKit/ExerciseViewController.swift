@@ -8,19 +8,6 @@
 import Foundation
 import UIKit
 import PinLayout
-import HTMLKit
-
-class Section {
-    var title: String
-    let options: [String]
-    var isOpened: Bool = false
-    
-    init(title: String,options: [String],isOpened: Bool = false) {
-        self.title = title
-        self.options = options
-        self.isOpened = isOpened
-    }
-}
 
 class ExerciseViewController: UIViewController {
     
@@ -31,18 +18,19 @@ class ExerciseViewController: UIViewController {
     private var sections = [Section]()
     private var subExUrls = [[String]]()
     
+    var sectionNames = [String]()
+    var subExNames = [[String]]()
+    
+    let activityIndicator = UIActivityIndicatorView(style: .large)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        activityIndicator.startAnimating()
         
-        let sectionNames = NetworkManager.shared.getSectionsName()
+        setupTable()
         
-        let subExNames = NetworkManager.shared.getSubExNames()
         subExUrls = NetworkManager.shared.getSubExUrls()
-        
-        for i in 0..<sectionNames.count {
-            sections.append(Section(title: sectionNames[i], options: subExNames[i] ) )
-        }
-        
         
         view.backgroundColor = .systemBackground
         
@@ -61,11 +49,15 @@ class ExerciseViewController: UIViewController {
         view.addSubview(tableView)
         view.addSubview(titleOfScreen)
         view.addSubview(titleInfo)
+        view.addSubview(activityIndicator)
         
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        activityIndicator.pin
+            .center()
         
         titleOfScreen.pin
             .topCenter(60)
@@ -75,6 +67,29 @@ class ExerciseViewController: UIViewController {
             .left().right().marginHorizontal(10).height(60)
         
         tableView.pin.below(of: titleInfo).left().right().bottom()
+    }
+    
+    func setupTable() {
+        async {
+            let result = await NetworkManager.shared.loadNamesSubNames()
+            switch result {
+            case .success(let res):
+                
+                sectionNames = res.map{$0.typeName}
+                subExNames = res.map{$0.subTypeNames}
+                
+                for i in 0..<sectionNames.count {
+                    sections.append(Section(title: sectionNames[i], options: subExNames[i] ) )
+                }
+                
+                tableView.reloadData()
+                activityIndicator.stopAnimating()
+                
+            case .failure(let error):
+                print(error)
+            }
+            
+        }
     }
     
 }

@@ -7,6 +7,8 @@
 
 import Foundation
 import HTMLKit
+import Firebase
+import FirebaseFirestoreSwift
 
 struct Theory {
     let name: String
@@ -14,8 +16,26 @@ struct Theory {
 }
 
 class NetworkManager {
+    var db: Firestore!
+    
     static let shared = NetworkManager()
-    private init() {}
+    
+    private init() {
+        let settings = FirestoreSettings()
+        Firestore.firestore().settings = settings
+        db = Firestore.firestore()
+    }
+
+    
+    func loadNamesSubNames() async -> Result<[ExerciseType], Error> {
+        do {
+            let doc = try await self.db.collection("Exercise").document("GlobalNames").getDocument()
+            let data = try doc.data(as: Types.self).exerciseTypes
+            return .success(data)
+        } catch {
+            return .failure(error)
+        }
+    }
     
     let urlString = "https://math-ege.sdamgia.ru/page/theory"
     
@@ -61,78 +81,6 @@ class NetworkManager {
         return theorys
         
     }
-    
-    func getSectionsName() -> ([String]) {
-        
-        let urlString = "https://ege.sdamgia.ru/prob_catalog"
-        
-        guard let myURL = URL(string: urlString) else {
-            print("Error: \(urlString) doesn't seem to be a valid URL")
-            return [""]
-        }
-
-        let myHTMLString: String
-        
-        do {
-            myHTMLString = try String(contentsOf: myURL, encoding: .utf8)
-        } catch {
-            print("bad conversion")
-            myHTMLString = ""
-        }
-        
-        
-        let document = HTMLDocument(string: myHTMLString)
-        let elements = document.querySelectorAll("b")
-        
-        var names: [String] = elements.compactMap({ element in
-            var name: String = ""
-            if element.className == "cat_name" {
-                name = element.textContent
-            }
-            return name
-        })
-        
-        names.remove(at: 0)
-        
-        return names
-    }
-    
-    func getSubExNames() -> [[String]] {
-        
-        let document = self.loadHtml(with: "https://ege.sdamgia.ru/prob_catalog")
-        
-        let subZ = document.querySelectorAll("a")
-        
-        var namesSubZ: [String] = subZ.compactMap({ element in
-            var name: String = ""
-            if element.className == "cat_name" {
-                name = element.textContent
-            }
-            return name
-        })
-        
-        namesSubZ.removeAll{$0.isEmpty}
-        
-        var arrayOfSubZ: [[String]] = [[]]
-        
-        let eachLength: [Int] = [6,1,9,11,11,4,8,6,7,2,6,7,8,7,4,4,11,4,3,5,3,4,4,7,1,5,6,2,3,1,3,4,4,1,3,4,3]
-        
-        
-        var array1 = [String]()
-        
-        for j in 0..<eachLength.count {
-            array1.removeAll()
-            for i in 0..<eachLength[j] {
-                array1.append(namesSubZ[i])
-            }
-            arrayOfSubZ.append(array1)
-            namesSubZ.removeSubrange(0..<eachLength[j])
-        }
-        arrayOfSubZ.remove(at: 0)
-        
-        return arrayOfSubZ
-    }
-    
     
     func getSubExUrls() -> [[String]] {
         
@@ -197,18 +145,6 @@ class NetworkManager {
         kekes.forEach {
             print($0)
         }
-        
-//        let elements = document.querySelectorAll("a")
-//
-//        var kekes = elements.map {
-//            $0.textContent.filter("0123456789".contains)
-//        }
-//
-//        kekes.removeAll{$0.isEmpty}
-//
-//        kekes = kekes.filter{$0.count > 4}
-//
-//        kekes.forEach{print($0)}
         
         return kekes
     }
