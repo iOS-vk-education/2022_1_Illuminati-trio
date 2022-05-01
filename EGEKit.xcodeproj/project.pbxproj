@@ -23,7 +23,6 @@
 		CE8B74A9280EE512002E32A3 /* UIViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B74A7280EE512002E32A3 /* UIViewTableViewCell.swift */; };
 		CE8B74AA280EE512002E32A3 /* UIViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8B74A8280EE512002E32A3 /* UIViewTableViewCell.xib */; };
 		CE8B74AC2810033A002E32A3 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B74AB2810033A002E32A3 /* DetailsViewController.swift */; };
-		CEB339922809DF6D00476B97 /* HTMLKit in Frameworks */ = {isa = PBXBuildFile; productRef = CEB339912809DF6D00476B97 /* HTMLKit */; };
 		CEB33994280B431500476B97 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB33993280B431500476B97 /* NetworkManager.swift */; };
 		CEB33996280B608E00476B97 /* TheoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB33995280B608E00476B97 /* TheoryDetailsViewController.swift */; };
 		CEE81B3F28147F2400E2238C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEE81B3E28147F2400E2238C /* GoogleService-Info.plist */; };
@@ -70,7 +69,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE81B42281481C000E2238C /* FirebaseDatabase in Frameworks */,
-				CEB339922809DF6D00476B97 /* HTMLKit in Frameworks */,
 				CEE81B44281481C000E2238C /* FirebaseDatabaseSwift-Beta in Frameworks */,
 				CE2D65A42807794E0012A4D8 /* PinLayout in Frameworks */,
 				CEE81B46281481C000E2238C /* FirebaseDynamicLinks in Frameworks */,
@@ -147,7 +145,6 @@
 			name = EGEKit;
 			packageProductDependencies = (
 				CE2D65A32807794E0012A4D8 /* PinLayout */,
-				CEB339912809DF6D00476B97 /* HTMLKit */,
 				CEE81B41281481C000E2238C /* FirebaseDatabase */,
 				CEE81B43281481C000E2238C /* FirebaseDatabaseSwift-Beta */,
 				CEE81B45281481C000E2238C /* FirebaseDynamicLinks */,
@@ -187,7 +184,6 @@
 			mainGroup = CE6DA42528061355003D1BFC;
 			packageReferences = (
 				CE2D65A22807794E0012A4D8 /* XCRemoteSwiftPackageReference "PinLayout" */,
-				CEB339902809DF6D00476B97 /* XCRemoteSwiftPackageReference "HTMLKit" */,
 				CEE81B40281481C000E2238C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = CE6DA42F28061355003D1BFC /* Products */;
@@ -461,14 +457,6 @@
 				kind = branch;
 			};
 		};
-		CEB339902809DF6D00476B97 /* XCRemoteSwiftPackageReference "HTMLKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/iabudiab/HTMLKit";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		CEE81B40281481C000E2238C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -484,11 +472,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE2D65A22807794E0012A4D8 /* XCRemoteSwiftPackageReference "PinLayout" */;
 			productName = PinLayout;
-		};
-		CEB339912809DF6D00476B97 /* HTMLKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CEB339902809DF6D00476B97 /* XCRemoteSwiftPackageReference "HTMLKit" */;
-			productName = HTMLKit;
 		};
 		CEE81B41281481C000E2238C /* FirebaseDatabase */ = {
 			isa = XCSwiftPackageProductDependency;

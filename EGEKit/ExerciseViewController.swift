@@ -9,19 +9,18 @@ import Foundation
 import UIKit
 import PinLayout
 
-class ExerciseViewController: UIViewController {
+final class ExerciseViewController: UIViewController {
     
     private let titleOfScreen = UILabel()
     private let titleInfo = UILabel()
     private var tableView = UITableView()
 
     private var sections = [Section]()
-    private var subExUrls = [[String]]()
     
     var sectionNames = [String]()
     var subExNames = [[String]]()
     
-    let activityIndicator = UIActivityIndicatorView(style: .large)
+    private let activityIndicator = UIActivityIndicatorView(style: .large)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +28,6 @@ class ExerciseViewController: UIViewController {
         activityIndicator.startAnimating()
         
         setupTable()
-        
-        subExUrls = NetworkManager.shared.getSubExUrls()
         
         view.backgroundColor = .systemBackground
         
@@ -70,25 +67,21 @@ class ExerciseViewController: UIViewController {
     }
     
     func setupTable() {
-        async {
+        Task {
             let result = await NetworkManager.shared.loadNamesSubNames()
-            switch result {
-            case .success(let res):
                 
-                sectionNames = res.map{$0.typeName}
-                subExNames = res.map{$0.subTypeNames}
-                
-                for i in 0..<sectionNames.count {
-                    sections.append(Section(title: sectionNames[i], options: subExNames[i] ) )
-                }
-                
-                tableView.reloadData()
-                activityIndicator.stopAnimating()
-                
-            case .failure(let error):
-                print(error)
+            sectionNames = result.map{$0.typeName}
+            subExNames = result.map{$0.subTypeNames}
+            subExNames[23] = subExNames[23].map{
+                $0.replacingOccurrences(of: "\\.\\s", with: " ", options: .regularExpression)
             }
-            
+                
+            for i in 0..<sectionNames.count {
+                sections.append(Section(title: sectionNames[i], options: subExNames[i] ) )
+            }
+                
+            tableView.reloadData()
+            activityIndicator.stopAnimating()
         }
     }
     
@@ -136,8 +129,7 @@ extension ExerciseViewController: UITableViewDelegate, UITableViewDataSource {
             sections[indexPath.section].isOpened = !sections[indexPath.section].isOpened
             tableView.reloadSections([indexPath.section], with: .none)
         } else {
-            let viewC = ExerciseDetViewController(urlString: subExUrls[indexPath.section][indexPath.row - 1],
-                                                  title0: sections[indexPath.section].options[indexPath.row - 1])
+            let viewC = ExerciseDetViewController(title0: sections[indexPath.section].options[indexPath.row - 1])
             let navC = UINavigationController(rootViewController: viewC)
             present(navC, animated: true, completion: nil)
         }

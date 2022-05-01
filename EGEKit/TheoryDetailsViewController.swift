@@ -9,6 +9,9 @@ import Foundation
 import WebKit
 
 final class TheoryDetailsViewController: ViewController {
+    
+    let activityIndicator = UIActivityIndicatorView(style: .large)
+    
     private let urlString: String
     private let title0: String
     private let webView: WKWebView = {
@@ -36,9 +39,12 @@ final class TheoryDetailsViewController: ViewController {
         backbutton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backbutton)
         
-        
-        
         view.addSubview(webView)
+        view.addSubview(activityIndicator)
+        
+        activityIndicator.startAnimating()
+        activityIndicator.center = self.view.center
+        
         webView.frame = view.bounds
         webView.navigationDelegate = self
         
@@ -59,6 +65,7 @@ final class TheoryDetailsViewController: ViewController {
 
 extension TheoryDetailsViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        // yo
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
     }
 }

@@ -9,18 +9,21 @@ import Foundation
 import UIKit
 import PinLayout
 
-class TheoryViewController: UIViewController {
+final class TheoryViewController: UIViewController {
     
     private let titleOfScreen = UILabel()
     private let titleInfo = UILabel()
     private var tableView = UITableView()
-    let urlTheory = "https://math-ege.sdamgia.ru/page/theory"
-    var theoryAll:[Theory] = []
+    var theoryNames: [String] = []
+    var theoryUrls: [String] = []
+    var fontSize: CGFloat = 16
+    let activityIndicator = UIActivityIndicatorView(style: .large)
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        theoryAll = NetworkManager.shared.loadTheory(with: urlTheory)
+        getNamesUrls()
         
         titleOfScreen.text = "Полезный материал"
         titleOfScreen.font = .boldSystemFont(ofSize: 20)
@@ -36,23 +39,60 @@ class TheoryViewController: UIViewController {
         view.addSubview(tableView)
         view.addSubview(titleOfScreen)
         view.addSubview(titleInfo)
+        view.addSubview(activityIndicator)
         
-        tableView.tableFooterView = UIView()
+        activityIndicator.startAnimating()
         
         view.backgroundColor = .systemBackground
+        
+        let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch))
+        view.addGestureRecognizer(pinchRecognizer)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        activityIndicator.pin
+            .center()
         
         titleOfScreen.pin
             .topCenter(60)
             .sizeToFit()
         
         titleInfo.pin.below(of: titleOfScreen)
-            .left().right().marginHorizontal(10).height(60)
+            .left()
+            .right()
+            .marginHorizontal(10)
+            .height(60)
         
-        tableView.pin.below(of: titleInfo).left().right().bottom()
+        tableView.pin
+            .below(of: titleInfo)
+            .left()
+            .right()
+            .bottom()
+    }
+    
+    @objc
+    private func handlePinch(gestureRecognizer: UIPinchGestureRecognizer) {
+        guard gestureRecognizer.state == .began || gestureRecognizer.state == .changed else {
+            return
+        }
+        self.fontSize = fontSize * gestureRecognizer.scale
+        print(fontSize)
+        gestureRecognizer.scale = 1
+
+        tableView.reloadData()
+    }
+    
+    private func getNamesUrls() {
+        Task {
+            let result = await NetworkManager.shared.loadTheoryNamesAndUrls()
+            
+            theoryNames = result.0
+            theoryUrls = result.1
+            tableView.reloadData()
+            activityIndicator.stopAnimating()
+        }
     }
     
     func open(with urlString: String, title: String) {
@@ -67,12 +107,12 @@ class TheoryViewController: UIViewController {
 extension TheoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.open(with: theoryAll[indexPath.row].urlString, title: theoryAll[indexPath.row].name)
+        self.open(with: theoryUrls[indexPath.row], title: theoryNames[indexPath.row])
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        theoryAll.count
+        theoryNames.count
     }
     
     
@@ -84,8 +124,11 @@ extension TheoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
+        let font = UIFont.systemFont(ofSize: self.fontSize, weight: .regular)
+        
         var defaultConf = cell.defaultContentConfiguration()
-        defaultConf.text = theoryAll[indexPath.row].name
+        defaultConf.textProperties.font = font
+        defaultConf.text = theoryNames[indexPath.row]
         cell.contentConfiguration = defaultConf
         
         return cell

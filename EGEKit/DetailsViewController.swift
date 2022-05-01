@@ -10,20 +10,24 @@ import UIKit
 import WebKit
 import PinLayout
 
-class DetailsViewController: ViewController {
+final class DetailsViewController: ViewController {
     
-    let name: String
-    let htmlString: String
+    let number: String
+    var htmlUslovie: String = ""
+    var htmlSolution: String = ""
     let solutionButton = UIButton()
-    let bottomLabel = UILabel()
     
-    private let webView: WKWebView = {
+    private let webViewUslovie: WKWebView = {
         return WKWebView(frame: .zero)
     }()
     
-    init(htmlString: String,name: String) {
-        self.htmlString = htmlString
-        self.name = name
+    private let webViewSolution: WKWebView = {
+        return WKWebView(frame: .zero)
+    }()
+
+    
+    init(number: String) {
+        self.number = number
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -34,11 +38,9 @@ class DetailsViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = name
+        self.title = "Задача № \(number)"
         solutionButton.setTitle("Показать решение", for: .normal)
         solutionButton.setTitleColor(.black, for: .normal)
-        
-        bottomLabel.text = "Здесь будет решение"
         
         let backbutton = UIButton(type: .custom)
         let config = UIImage.SymbolConfiguration(pointSize: 25.0, weight: .medium, scale: .medium)
@@ -47,32 +49,69 @@ class DetailsViewController: ViewController {
         backbutton.setTitle("Назад", for: .normal)
         backbutton.setTitleColor(.systemBlue, for: .normal)
         backbutton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        solutionButton.addTarget(self, action: #selector(hideUnhide), for: .touchUpInside)
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backbutton)
         
-        view.addSubview(webView)
+        webViewSolution.isHidden = true
+        
+        view.addSubview(webViewUslovie)
+        view.addSubview(webViewSolution)
         view.addSubview(solutionButton)
-        view.addSubview(bottomLabel)
         view.backgroundColor = .systemBackground
         
 //        webView.contentMode = .scaleAspectFit
-        webView.pageZoom = 3
-        webView.loadHTMLString(self.htmlString, baseURL: .none)
+//        webView.pageZoom = 3
+        
+        loadInfo()
         
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        solutionButton.pin.center().sizeToFit()
-        webView.pin.top().left().right().above(of: solutionButton)
-        bottomLabel.pin.bottomCenter(250).sizeToFit()
+        solutionButton.pin
+            .center()
+            .sizeToFit()
+        
+        webViewUslovie.pin
+            .top()
+            .left()
+            .right()
+            .above(of: solutionButton)
+        
+        webViewSolution.pin
+            .below(of: solutionButton)
+            .left()
+            .right()
+            .bottom()
+    }
+    
+    func loadInfo() {
+        Task {
+            let result = await NetworkManager.shared.loadUslovieAndSolution(at: number)
+            let align = "<meta name=\"viewport\" content=\"width=device-width\">"
+            htmlUslovie = align + result.0
+            htmlSolution = align + result.1
+            
+            webViewUslovie.loadHTMLString(htmlUslovie, baseURL: .none)
+            webViewSolution.loadHTMLString(htmlSolution, baseURL: .none)
+        }
+    }
+    
+    @objc
+    func hideUnhide() {
+        webViewSolution.isHidden = !webViewSolution.isHidden
+        if webViewSolution.isHidden {
+            solutionButton.setTitle("Показать решение", for: .normal)
+        } else {
+        solutionButton.setTitle("Скрыть решение", for: .normal)
+        }
     }
     
     @objc
     func goBack()
     {
-//        self.navigationController?.dismiss(animated: true)
         navigationController?.popToRootViewController(animated: true)
     }
     
