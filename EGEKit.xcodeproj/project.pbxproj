@@ -111,20 +111,36 @@
 				CE6DA43F28061357003D1BFC /* Info.plist */,
 				CE2D6596280767C30012A4D8 /* TabBarController.swift */,
 				CE2D6598280768690012A4D8 /* FavouriteViewController.swift */,
-				CE2D659C280769030012A4D8 /* ExerciseViewController.swift */,
-				CE8B74A0280ED718002E32A3 /* ExerciseDetViewCotroller.swift */,
-				CE8B74A7280EE512002E32A3 /* UIViewTableViewCell.swift */,
-				CE8B74A8280EE512002E32A3 /* UIViewTableViewCell.xib */,
-				CE8B74AB2810033A002E32A3 /* DetailsViewController.swift */,
-				CE2D65A028076B240012A4D8 /* TheoryViewController.swift */,
-				CEB33995280B608E00476B97 /* TheoryDetailsViewController.swift */,
-				CEB33993280B431500476B97 /* NetworkManager.swift */,
+				CEAB0B70282322B9000F0FC4 /* Exercise */,
+				CEAB0B71282322EE000F0FC4 /* Theory */,
 				CE2D659E280769800012A4D8 /* SettingsViewController.swift */,
-				CEE81B3E28147F2400E2238C /* GoogleService-Info.plist */,
+				CEB33993280B431500476B97 /* NetworkManager.swift */,
 				CEE81B832816B46700E2238C /* FirebaseStructs.swift */,
 				CEE81B852816BE8700E2238C /* SectionStruct.swift */,
+				CEE81B3E28147F2400E2238C /* GoogleService-Info.plist */,
 			);
 			path = EGEKit;
+			sourceTree = "<group>";
+		};
+		CEAB0B70282322B9000F0FC4 /* Exercise */ = {
+			isa = PBXGroup;
+			children = (
+				CE2D659C280769030012A4D8 /* ExerciseViewController.swift */,
+				CE8B74A0280ED718002E32A3 /* ExerciseDetViewCotroller.swift */,
+				CE8B74AB2810033A002E32A3 /* DetailsViewController.swift */,
+				CE8B74A7280EE512002E32A3 /* UIViewTableViewCell.swift */,
+				CE8B74A8280EE512002E32A3 /* UIViewTableViewCell.xib */,
+			);
+			path = Exercise;
+			sourceTree = "<group>";
+		};
+		CEAB0B71282322EE000F0FC4 /* Theory */ = {
+			isa = PBXGroup;
+			children = (
+				CE2D65A028076B240012A4D8 /* TheoryViewController.swift */,
+				CEB33995280B608E00476B97 /* TheoryDetailsViewController.swift */,
+			);
+			path = Theory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

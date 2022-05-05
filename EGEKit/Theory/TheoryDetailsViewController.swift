@@ -32,12 +32,7 @@ final class TheoryDetailsViewController: ViewController {
         super.viewDidLoad()
         self.title = title0
         
-        let backbutton = UIButton(type: .custom)
-        let config = UIImage.SymbolConfiguration(pointSize: 25.0, weight: .medium, scale: .medium)
-        let image = UIImage(systemName: "chevron.left", withConfiguration: config)
-        backbutton.setImage(image, for: .normal)
-        backbutton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backbutton)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(goBack))
         
         view.addSubview(webView)
         view.addSubview(activityIndicator)
@@ -54,12 +49,10 @@ final class TheoryDetailsViewController: ViewController {
     }
  
     @objc
-    func goBack()
+    private func goBack()
     {
         self.navigationController?.dismiss(animated: true)
     }
-    
-    
     
 }
 

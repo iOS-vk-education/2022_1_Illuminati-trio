@@ -12,10 +12,11 @@ import PinLayout
 
 final class DetailsViewController: ViewController {
     
-    let number: String
-    var htmlUslovie: String = ""
-    var htmlSolution: String = ""
-    let solutionButton = UIButton()
+    private let number: String
+    private var htmlUslovie: String = ""
+    private var htmlSolution: String = ""
+    private let solutionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+    private let activityIndicator = UIActivityIndicatorView(style: .medium)
     
     private let webViewUslovie: WKWebView = {
         return WKWebView(frame: .zero)
@@ -39,26 +40,23 @@ final class DetailsViewController: ViewController {
         super.viewDidLoad()
         
         self.title = "Задача № \(number)"
-        solutionButton.setTitle("Показать решение", for: .normal)
-        solutionButton.setTitleColor(.black, for: .normal)
+        view.backgroundColor = .systemBackground
         
-        let backbutton = UIButton(type: .custom)
-        let config = UIImage.SymbolConfiguration(pointSize: 25.0, weight: .medium, scale: .medium)
-        let image = UIImage(systemName: "chevron.left", withConfiguration: config)
-        backbutton.setImage(image, for: .normal)
-        backbutton.setTitle("Назад", for: .normal)
-        backbutton.setTitleColor(.systemBlue, for: .normal)
-        backbutton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        solutionButton.addTarget(self, action: #selector(hideUnhide), for: .touchUpInside)
+        activityIndicator.startAnimating()
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backbutton)
+        let backButton = UIBarButtonItem()
+        backButton.title = "Назад"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+                
+        solutionButton.configuration = setupSolButton()
         
         webViewSolution.isHidden = true
         
-        view.addSubview(webViewUslovie)
-        view.addSubview(webViewSolution)
-        view.addSubview(solutionButton)
-        view.backgroundColor = .systemBackground
+        webViewUslovie.navigationDelegate = self
+        webViewUslovie.addSubview(activityIndicator)
+        
+        [webViewUslovie,webViewSolution,solutionButton].forEach{
+            self.view.addSubview($0)}
         
 //        webView.contentMode = .scaleAspectFit
 //        webView.pageZoom = 3
@@ -71,7 +69,8 @@ final class DetailsViewController: ViewController {
         super.viewDidLayoutSubviews()
         
         solutionButton.pin
-            .center()
+            .top(40%)
+            .left(5)
             .sizeToFit()
         
         webViewUslovie.pin
@@ -85,6 +84,18 @@ final class DetailsViewController: ViewController {
             .left()
             .right()
             .bottom()
+        
+        activityIndicator.pin.center()
+    }
+    
+    func setupSolButton() -> UIButton.Configuration {
+        solutionButton.isHidden = true
+        solutionButton.addTarget(self, action: #selector(hideUnhide),
+                                 for: .touchUpInside)
+        var config: UIButton.Configuration = .filled()
+        config.title = "Показать решение"
+        config.baseBackgroundColor = .systemIndigo
+        return config
     }
     
     func loadInfo() {
@@ -100,7 +111,7 @@ final class DetailsViewController: ViewController {
     }
     
     @objc
-    func hideUnhide() {
+    private func hideUnhide() {
         webViewSolution.isHidden = !webViewSolution.isHidden
         if webViewSolution.isHidden {
             solutionButton.setTitle("Показать решение", for: .normal)
@@ -108,11 +119,12 @@ final class DetailsViewController: ViewController {
         solutionButton.setTitle("Скрыть решение", for: .normal)
         }
     }
-    
-    @objc
-    func goBack()
-    {
-        navigationController?.popToRootViewController(animated: true)
+
+}
+
+extension DetailsViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        activityIndicator.stopAnimating()
+        solutionButton.isHidden = false
     }
-    
 }

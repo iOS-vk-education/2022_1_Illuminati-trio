@@ -17,8 +17,8 @@ final class ExerciseViewController: UIViewController {
 
     private var sections = [Section]()
     
-    var sectionNames = [String]()
-    var subExNames = [[String]]()
+    private var sectionNames = [String]()
+    private var subExNames = [[String]]()
     
     private let activityIndicator = UIActivityIndicatorView(style: .large)
     
@@ -40,13 +40,10 @@ final class ExerciseViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(.init(nibName: "LoreTableViewCell", bundle: nil), forCellReuseIdentifier: "LoreTableViewCell")
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(.init(nibName: "UIViewTableViewCell", bundle: nil), forCellReuseIdentifier: "UIViewTableViewCell")
+        tableView.separatorStyle = .none
         
-        view.addSubview(tableView)
-        view.addSubview(titleOfScreen)
-        view.addSubview(titleInfo)
-        view.addSubview(activityIndicator)
+        [tableView,titleOfScreen,titleInfo,activityIndicator].forEach{self.view.addSubview($0)}
         
     }
     
@@ -66,7 +63,7 @@ final class ExerciseViewController: UIViewController {
         tableView.pin.below(of: titleInfo).left().right().bottom()
     }
     
-    func setupTable() {
+    private func setupTable() {
         Task {
             let result = await NetworkManager.shared.loadNamesSubNames()
                 
@@ -89,6 +86,10 @@ final class ExerciseViewController: UIViewController {
 
 extension ExerciseViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        60
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         sections.count
     }
@@ -106,28 +107,33 @@ extension ExerciseViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "UIViewTableViewCell", for: indexPath)
+                as? UIViewTableViewCell else { return .init() }
         if indexPath.row == 0 {
             let font = UIFont.systemFont(ofSize: 16, weight: .bold)
+            cell.containerView.layer.borderColor = UIColor.systemGray4.cgColor
+            cell.containerView.layer.borderWidth = 0.5
+//            cell.accessoryType = .disclosureIndicator
             cell.textLabel?.font = font
-            cell.textLabel?.text = sections[indexPath.section].title
+            cell.textLabel?.text = "\(indexPath.section + 1). " + sections[indexPath.section].title
             return cell
         }
         else {
+            cell.containerView.layer.borderWidth = 0.0
             let font = UIFont.systemFont(ofSize: 15, weight: .light)
             cell.textLabel?.font = font
-            cell.textLabel?.text = sections[indexPath.section].options[indexPath.row - 1]
+            cell.textLabel?.text = " - " + sections[indexPath.section].options[indexPath.row - 1]
         }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Section \(indexPath.section) Row: \(indexPath.row )")
+//        print("Section \(indexPath.section) Row: \(indexPath.row )")
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 0 {
             sections[indexPath.section].isOpened = !sections[indexPath.section].isOpened
-            tableView.reloadSections([indexPath.section], with: .none)
+            tableView.reloadSections([indexPath.section], with: .fade)
         } else {
             let viewC = ExerciseDetViewController(title0: sections[indexPath.section].options[indexPath.row - 1])
             let navC = UINavigationController(rootViewController: viewC)

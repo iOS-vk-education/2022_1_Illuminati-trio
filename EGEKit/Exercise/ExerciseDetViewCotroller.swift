@@ -33,9 +33,11 @@ final class ExerciseDetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = title0
+//        tableView.backgroundColor = .systemGray6
         
-        view.addSubview(tableView)
-        view.addSubview(activityIndicator)
+        [tableView,activityIndicator].forEach{self.view.addSubview($0)}
+
+        tableView.separatorStyle = .none
         
         tableView.frame = view.bounds
         tableView.delegate = self
@@ -46,21 +48,14 @@ final class ExerciseDetViewController: UIViewController {
         
         getInformation()
         
-        let backbutton = UIButton(type: .custom)
-        let config = UIImage.SymbolConfiguration(pointSize: 25.0, weight: .medium, scale: .medium)
-        let image = UIImage(systemName: "chevron.left", withConfiguration: config)
-        backbutton.setImage(image, for: .normal)
-        backbutton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backbutton)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(goBack))
 
         tableView.register(.init(nibName: "UIViewTableViewCell", bundle: nil), forCellReuseIdentifier: "UIViewTableViewCell")
         
     }
-
     
     @objc
-    func goBack()
+    private func goBack()
     {
         self.navigationController?.dismiss(animated: true)
     }
@@ -78,6 +73,10 @@ final class ExerciseDetViewController: UIViewController {
 
 extension ExerciseDetViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        60
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         ExerciseNumbers.count
     }
@@ -85,7 +84,7 @@ extension ExerciseDetViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "UIViewTableViewCell", for: indexPath)
                 as? UIViewTableViewCell else { return .init() }
-        cell.mainLabel.text = "Задача № " + ExerciseNumbers[indexPath.row]
+        cell.textLabel?.text = "Задача № " + ExerciseNumbers[indexPath.row]
         return cell
     }
     

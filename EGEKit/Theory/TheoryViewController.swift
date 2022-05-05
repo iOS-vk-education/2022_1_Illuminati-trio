@@ -34,12 +34,12 @@ final class TheoryViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(.init(nibName: "UIViewTableViewCell", bundle: nil), forCellReuseIdentifier: "UIViewTableViewCell")
+        tableView.separatorStyle = .none
+
+//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
-        view.addSubview(tableView)
-        view.addSubview(titleOfScreen)
-        view.addSubview(titleInfo)
-        view.addSubview(activityIndicator)
+        [tableView,titleOfScreen,titleInfo,activityIndicator].forEach{self.view.addSubview($0)}
         
         activityIndicator.startAnimating()
         
@@ -78,7 +78,7 @@ final class TheoryViewController: UIViewController {
             return
         }
         self.fontSize = fontSize * gestureRecognizer.scale
-        print(fontSize)
+//        print(fontSize)
         gestureRecognizer.scale = 1
 
         tableView.reloadData()
@@ -95,7 +95,7 @@ final class TheoryViewController: UIViewController {
         }
     }
     
-    func open(with urlString: String, title: String) {
+    private func open(with urlString: String, title: String) {
         
         let viewC = TheoryDetailsViewController(urlString: urlString,title0: title)
         let navC = UINavigationController(rootViewController: viewC)
@@ -105,6 +105,10 @@ final class TheoryViewController: UIViewController {
 }
 
 extension TheoryViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        60
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.open(with: theoryUrls[indexPath.row], title: theoryNames[indexPath.row])
@@ -122,14 +126,12 @@ extension TheoryViewController: UITableViewDelegate, UITableViewDataSource {
             
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UIViewTableViewCell", for: indexPath)
         
         let font = UIFont.systemFont(ofSize: self.fontSize, weight: .regular)
         
-        var defaultConf = cell.defaultContentConfiguration()
-        defaultConf.textProperties.font = font
-        defaultConf.text = theoryNames[indexPath.row]
-        cell.contentConfiguration = defaultConf
+        cell.textLabel?.text = theoryNames[indexPath.row]
+        cell.textLabel?.font = font
         
         return cell
     }

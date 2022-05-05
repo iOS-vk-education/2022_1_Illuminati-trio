@@ -18,3 +18,8 @@ struct Section {
         self.isOpened = isOpened
     }
 }
+
+struct Theory {
+    let name: String
+    let urlString: String
+}
