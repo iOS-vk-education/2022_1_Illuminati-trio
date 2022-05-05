@@ -9,6 +9,9 @@ import Foundation
 import WebKit
 
 final class TheoryDetailsViewController: ViewController {
+    
+    let activityIndicator = UIActivityIndicatorView(style: .large)
+    
     private let urlString: String
     private let title0: String
     private let webView: WKWebView = {
@@ -29,16 +32,14 @@ final class TheoryDetailsViewController: ViewController {
         super.viewDidLoad()
         self.title = title0
         
-        let backbutton = UIButton(type: .custom)
-        let config = UIImage.SymbolConfiguration(pointSize: 25.0, weight: .medium, scale: .medium)
-        let image = UIImage(systemName: "chevron.left", withConfiguration: config)
-        backbutton.setImage(image, for: .normal)
-        backbutton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backbutton)
-        
-        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(goBack))
         
         view.addSubview(webView)
+        view.addSubview(activityIndicator)
+        
+        activityIndicator.startAnimating()
+        activityIndicator.center = self.view.center
+        
         webView.frame = view.bounds
         webView.navigationDelegate = self
         
@@ -48,17 +49,16 @@ final class TheoryDetailsViewController: ViewController {
     }
  
     @objc
-    func goBack()
+    private func goBack()
     {
         self.navigationController?.dismiss(animated: true)
     }
-    
-    
     
 }
 
 extension TheoryDetailsViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        // yo
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
     }
 }

@@ -8,41 +8,26 @@
 import Foundation
 import UIKit
 import PinLayout
-import HTMLKit
 
-class Section {
-    var title: String
-    let options: [String]
-    var isOpened: Bool = false
-    
-    init(title: String,options: [String],isOpened: Bool = false) {
-        self.title = title
-        self.options = options
-        self.isOpened = isOpened
-    }
-}
-
-class ExerciseViewController: UIViewController {
+final class ExerciseViewController: UIViewController {
     
     private let titleOfScreen = UILabel()
     private let titleInfo = UILabel()
     private var tableView = UITableView()
 
     private var sections = [Section]()
-    private var subExUrls = [[String]]()
+    
+    private var sectionNames = [String]()
+    private var subExNames = [[String]]()
+    
+    private let activityIndicator = UIActivityIndicatorView(style: .large)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        activityIndicator.startAnimating()
         
-        let sectionNames = NetworkManager.shared.getSectionsName()
-        
-        let subExNames = NetworkManager.shared.getSubExNames()
-        subExUrls = NetworkManager.shared.getSubExUrls()
-        
-        for i in 0..<sectionNames.count {
-            sections.append(Section(title: sectionNames[i], options: subExNames[i] ) )
-        }
-        
+        setupTable()
         
         view.backgroundColor = .systemBackground
         
@@ -55,17 +40,18 @@ class ExerciseViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(.init(nibName: "LoreTableViewCell", bundle: nil), forCellReuseIdentifier: "LoreTableViewCell")
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(.init(nibName: "UIViewTableViewCell", bundle: nil), forCellReuseIdentifier: "UIViewTableViewCell")
+        tableView.separatorStyle = .none
         
-        view.addSubview(tableView)
-        view.addSubview(titleOfScreen)
-        view.addSubview(titleInfo)
+        [tableView,titleOfScreen,titleInfo,activityIndicator].forEach{self.view.addSubview($0)}
         
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        activityIndicator.pin
+            .center()
         
         titleOfScreen.pin
             .topCenter(60)
@@ -77,9 +63,32 @@ class ExerciseViewController: UIViewController {
         tableView.pin.below(of: titleInfo).left().right().bottom()
     }
     
+    private func setupTable() {
+        Task {
+            let result = await NetworkManager.shared.loadNamesSubNames()
+                
+            sectionNames = result.map{$0.typeName}
+            subExNames = result.map{$0.subTypeNames}
+            subExNames[23] = subExNames[23].map{
+                $0.replacingOccurrences(of: "\\.\\s", with: " ", options: .regularExpression)
+            }
+                
+            for i in 0..<sectionNames.count {
+                sections.append(Section(title: sectionNames[i], options: subExNames[i] ) )
+            }
+                
+            tableView.reloadData()
+            activityIndicator.stopAnimating()
+        }
+    }
+    
 }
 
 extension ExerciseViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        60
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         sections.count
@@ -98,31 +107,35 @@ extension ExerciseViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "UIViewTableViewCell", for: indexPath)
+                as? UIViewTableViewCell else { return .init() }
         if indexPath.row == 0 {
             let font = UIFont.systemFont(ofSize: 16, weight: .bold)
+            cell.containerView.layer.borderColor = UIColor.systemGray4.cgColor
+            cell.containerView.layer.borderWidth = 0.5
+//            cell.accessoryType = .disclosureIndicator
             cell.textLabel?.font = font
-            cell.textLabel?.text = sections[indexPath.section].title
+            cell.textLabel?.text = "\(indexPath.section + 1). " + sections[indexPath.section].title
             return cell
         }
         else {
+            cell.containerView.layer.borderWidth = 0.0
             let font = UIFont.systemFont(ofSize: 15, weight: .light)
             cell.textLabel?.font = font
-            cell.textLabel?.text = sections[indexPath.section].options[indexPath.row - 1]
+            cell.textLabel?.text = " - " + sections[indexPath.section].options[indexPath.row - 1]
         }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Section \(indexPath.section) Row: \(indexPath.row )")
+//        print("Section \(indexPath.section) Row: \(indexPath.row )")
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 0 {
             sections[indexPath.section].isOpened = !sections[indexPath.section].isOpened
-            tableView.reloadSections([indexPath.section], with: .none)
+            tableView.reloadSections([indexPath.section], with: .fade)
         } else {
-            let viewC = ExerciseDetViewController(urlString: subExUrls[indexPath.section][indexPath.row - 1],
-                                                  title0: sections[indexPath.section].options[indexPath.row - 1])
+            let viewC = ExerciseDetViewController(title0: sections[indexPath.section].options[indexPath.row - 1])
             let navC = UINavigationController(rootViewController: viewC)
             present(navC, animated: true, completion: nil)
         }
