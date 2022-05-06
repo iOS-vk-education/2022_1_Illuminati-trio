@@ -23,6 +23,9 @@
 		CE8B74A9280EE512002E32A3 /* UIViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B74A7280EE512002E32A3 /* UIViewTableViewCell.swift */; };
 		CE8B74AA280EE512002E32A3 /* UIViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8B74A8280EE512002E32A3 /* UIViewTableViewCell.xib */; };
 		CE8B74AC2810033A002E32A3 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B74AB2810033A002E32A3 /* DetailsViewController.swift */; };
+		CE902B152824535B0037E2AB /* HorizontalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE902B132824535A0037E2AB /* HorizontalCollectionViewCell.swift */; };
+		CE902B162824535B0037E2AB /* HorizontalCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE902B142824535A0037E2AB /* HorizontalCollectionViewCell.xib */; };
+		CE902B19282546520037E2AB /* FavouriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE902B18282546520037E2AB /* FavouriteManager.swift */; };
 		CEB33994280B431500476B97 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB33993280B431500476B97 /* NetworkManager.swift */; };
 		CEB33996280B608E00476B97 /* TheoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB33995280B608E00476B97 /* TheoryDetailsViewController.swift */; };
 		CEE81B3F28147F2400E2238C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEE81B3E28147F2400E2238C /* GoogleService-Info.plist */; };
@@ -56,6 +59,9 @@
 		CE8B74A7280EE512002E32A3 /* UIViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewTableViewCell.swift; sourceTree = "<group>"; };
 		CE8B74A8280EE512002E32A3 /* UIViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIViewTableViewCell.xib; sourceTree = "<group>"; };
 		CE8B74AB2810033A002E32A3 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		CE902B132824535A0037E2AB /* HorizontalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewCell.swift; sourceTree = "<group>"; };
+		CE902B142824535A0037E2AB /* HorizontalCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalCollectionViewCell.xib; sourceTree = "<group>"; };
+		CE902B18282546520037E2AB /* FavouriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteManager.swift; sourceTree = "<group>"; };
 		CEB33993280B431500476B97 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CEB33995280B608E00476B97 /* TheoryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheoryDetailsViewController.swift; sourceTree = "<group>"; };
 		CEE81B3E28147F2400E2238C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -110,7 +116,7 @@
 				CE6DA43C28061357003D1BFC /* LaunchScreen.storyboard */,
 				CE6DA43F28061357003D1BFC /* Info.plist */,
 				CE2D6596280767C30012A4D8 /* TabBarController.swift */,
-				CE2D6598280768690012A4D8 /* FavouriteViewController.swift */,
+				CE902B17282453670037E2AB /* FavouriteScreen */,
 				CEAB0B70282322B9000F0FC4 /* Exercise */,
 				CEAB0B71282322EE000F0FC4 /* Theory */,
 				CE2D659E280769800012A4D8 /* SettingsViewController.swift */,
@@ -120,6 +126,17 @@
 				CEE81B3E28147F2400E2238C /* GoogleService-Info.plist */,
 			);
 			path = EGEKit;
+			sourceTree = "<group>";
+		};
+		CE902B17282453670037E2AB /* FavouriteScreen */ = {
+			isa = PBXGroup;
+			children = (
+				CE902B18282546520037E2AB /* FavouriteManager.swift */,
+				CE2D6598280768690012A4D8 /* FavouriteViewController.swift */,
+				CE902B132824535A0037E2AB /* HorizontalCollectionViewCell.swift */,
+				CE902B142824535A0037E2AB /* HorizontalCollectionViewCell.xib */,
+			);
+			path = FavouriteScreen;
 			sourceTree = "<group>";
 		};
 		CEAB0B70282322B9000F0FC4 /* Exercise */ = {
@@ -218,6 +235,7 @@
 			files = (
 				CE8B74AA280EE512002E32A3 /* UIViewTableViewCell.xib in Resources */,
 				CE6DA43E28061357003D1BFC /* LaunchScreen.storyboard in Resources */,
+				CE902B162824535B0037E2AB /* HorizontalCollectionViewCell.xib in Resources */,
 				CEE81B3F28147F2400E2238C /* GoogleService-Info.plist in Resources */,
 				CE6DA43B28061357003D1BFC /* Assets.xcassets in Resources */,
 				CE6DA43928061355003D1BFC /* Main.storyboard in Resources */,
@@ -232,11 +250,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE81B862816BE8700E2238C /* SectionStruct.swift in Sources */,
+				CE902B19282546520037E2AB /* FavouriteManager.swift in Sources */,
 				CE8B74A9280EE512002E32A3 /* UIViewTableViewCell.swift in Sources */,
 				CE6DA43628061355003D1BFC /* ViewController.swift in Sources */,
 				CEB33994280B431500476B97 /* NetworkManager.swift in Sources */,
 				CE2D6597280767C30012A4D8 /* TabBarController.swift in Sources */,
 				CE2D659F280769800012A4D8 /* SettingsViewController.swift in Sources */,
+				CE902B152824535B0037E2AB /* HorizontalCollectionViewCell.swift in Sources */,
 				CE6DA43228061355003D1BFC /* AppDelegate.swift in Sources */,
 				CE8B74A1280ED718002E32A3 /* ExerciseDetViewCotroller.swift in Sources */,
 				CE2D6599280768690012A4D8 /* FavouriteViewController.swift in Sources */,

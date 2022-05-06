@@ -17,6 +17,7 @@ final class DetailsViewController: ViewController {
     private var htmlSolution: String = ""
     private let solutionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
     private let activityIndicator = UIActivityIndicatorView(style: .medium)
+    private lazy var isFav = FavouriteManager.shared.isFavourite(with: number)
     
     private let webViewUslovie: WKWebView = {
         return WKWebView(frame: .zero)
@@ -43,10 +44,12 @@ final class DetailsViewController: ViewController {
         view.backgroundColor = .systemBackground
         
         activityIndicator.startAnimating()
+
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(goBack))
         
-        let backButton = UIBarButtonItem()
-        backButton.title = "Назад"
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        print(isFav)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: createFavButton())
                 
         solutionButton.configuration = setupSolButton()
         
@@ -86,6 +89,40 @@ final class DetailsViewController: ViewController {
             .bottom()
         
         activityIndicator.pin.center()
+    }
+    
+    @objc
+    private func pressFavourite() {
+        if !isFav {
+        FavouriteManager.shared.markAsFavourite(with: self.number)
+        } else {
+            FavouriteManager.shared.deleteFromFavourite(with: self.number)
+        }
+        isFav = !isFav
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: createFavButton())
+    }
+    
+    @objc
+    private func goBack()
+    {
+        let check = self.navigationController?.viewControllers.count ?? 0
+        if check == 2 {
+            self.navigationController?.popToRootViewController(animated: true)
+        } else {
+            self.navigationController?.dismiss(animated: true)
+        }
+    }
+    
+    func createFavButton() -> UIButton {
+        var systemImageName: String = ""
+        let favButton = UIButton(type: .custom)
+        let config = UIImage.SymbolConfiguration(pointSize: 20.0)
+        isFav == true ? (systemImageName = "star.fill") : (systemImageName = "star")
+        let image = UIImage(systemName: systemImageName, withConfiguration: config)
+        favButton.setImage(image, for: .normal)
+
+        favButton.addTarget(self, action: #selector(pressFavourite), for: .touchUpInside)
+        return favButton
     }
     
     func setupSolButton() -> UIButton.Configuration {

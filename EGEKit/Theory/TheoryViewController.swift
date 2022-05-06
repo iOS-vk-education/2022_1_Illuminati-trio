@@ -56,7 +56,8 @@ final class TheoryViewController: UIViewController {
             .center()
         
         titleOfScreen.pin
-            .topCenter(60)
+            .top(view.pin.safeArea.top)
+            .hCenter()
             .sizeToFit()
         
         titleInfo.pin.below(of: titleOfScreen)

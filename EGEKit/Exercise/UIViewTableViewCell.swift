@@ -9,6 +9,7 @@ import UIKit
 
 class UIViewTableViewCell: UITableViewCell {
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var starIcon: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

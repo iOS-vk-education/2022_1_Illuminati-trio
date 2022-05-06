@@ -84,6 +84,9 @@ extension ExerciseDetViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "UIViewTableViewCell", for: indexPath)
                 as? UIViewTableViewCell else { return .init() }
+        if FavouriteManager.shared.isFavourite(with: ExerciseNumbers[indexPath.row]) {
+            cell.starIcon.isHidden = false
+        }
         cell.textLabel?.text = "Задача № " + ExerciseNumbers[indexPath.row]
         return cell
     }
