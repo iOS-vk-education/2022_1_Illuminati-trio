@@ -112,6 +112,7 @@ extension TheoryViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         self.open(with: theoryUrls[indexPath.row], title: theoryNames[indexPath.row])
     }
     

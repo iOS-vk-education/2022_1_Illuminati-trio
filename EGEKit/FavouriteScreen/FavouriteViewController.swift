@@ -42,7 +42,7 @@ class FavouriteViewController: UIViewController {
         hCollectionTitle.text = "Недавно просмотренные"
         hCollectionTitle.font = .systemFont(ofSize: 16)
     
-        hCollectionView.backgroundColor = .tertiarySystemFill
+//        hCollectionView.backgroundColor = .tertiarySystemFill
         hCollectionView.delegate = self
         hCollectionView.dataSource = self
         hCollectionView.register(HorizontalCollectionViewCell1.self, forCellWithReuseIdentifier: "HorizontalCollectionViewCell1")
@@ -58,7 +58,12 @@ class FavouriteViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(didUpdateTable),
-                                               name: FavouriteManager.notificationKey,
+                                               name: FavouriteManager.favouritesNotificationKey,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didUpdateCollection),
+                                               name: FavouriteManager.recentsNotificationKey,
                                                object: nil)
         
     }
@@ -105,15 +110,36 @@ class FavouriteViewController: UIViewController {
     }
     
     @objc
+    private func didUpdateCollection() {
+        hCollectionView.reloadData()
+    }
+    
+    @objc
     private func eraseFavourites() {
         FavouriteManager.shared.eraseFavourites()
+    }
+    
+    private func openExercise(with number: String) {
+        let viewC = DetailsViewController(number: "\(number)")
+        let navC = UINavigationController(rootViewController: viewC)
+        present(navC, animated: true)
     }
 }
 
 extension FavouriteViewController: UICollectionViewDelegate, UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let lastSeen: [String] = (UserDefaults.standard.array(forKey: FavouriteManager.recentsKey) as? [String]) ?? []
+
+        openExercise(with: lastSeen[indexPath.row])
+        FavouriteManager.shared.addLastSeen(with: lastSeen[indexPath.row])
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        let lastSeen: [String] = (UserDefaults.standard.array(forKey: FavouriteManager.recentsKey) as? [String]) ?? []
+
+        return lastSeen.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -134,7 +160,13 @@ UICollectionViewDelegateFlowLayout {
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HorizontalCollectionViewCell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "HorizontalCollectionViewCell", for: indexPath) as? HorizontalCollectionViewCell else { return .init() }
+        
+        let lastSeen: [String] = (UserDefaults.standard.array(forKey: FavouriteManager.recentsKey) as? [String]) ?? []
+        
+        cell.typeLabel.text = "Задача"
+        cell.numberLabel.text = lastSeen[indexPath.row]
         
         return cell
     }
@@ -148,14 +180,14 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let favouriteNumber: [String] = (UserDefaults.standard.array(forKey: FavouriteManager.key) as? [String]) ?? []
+        let favouriteNumber: [String] = (UserDefaults.standard.array(forKey: FavouriteManager.favouritesKey) as? [String]) ?? []
         
         return favouriteNumber.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "UIViewTableViewCell", for: indexPath) as? UIViewTableViewCell else { return .init() }
-        let favouriteNumber: [String] = (UserDefaults.standard.array(forKey: FavouriteManager.key) as? [String]) ?? []
+        let favouriteNumber: [String] = (UserDefaults.standard.array(forKey: FavouriteManager.favouritesKey) as? [String]) ?? []
 
         cell.textLabel?.text = "Задача № " + favouriteNumber[indexPath.row]
 
@@ -163,11 +195,12 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let favouriteNumber: [String] = (UserDefaults.standard.array(forKey: FavouriteManager.key) as? [String]) ?? []
+        tableView.deselectRow(at: indexPath, animated: true)
+        let favouriteNumber: [String] = (UserDefaults.standard.array(forKey: FavouriteManager.favouritesKey) as? [String]) ?? []
         
-        let viewC = DetailsViewController(number: "\(favouriteNumber[indexPath.row])")
-        let navC = UINavigationController(rootViewController: viewC)
-        present(navC, animated: true)
+        openExercise(with: favouriteNumber[indexPath.row])
+        FavouriteManager.shared.addLastSeen(with: favouriteNumber[indexPath.row])
+
     }
 
 }

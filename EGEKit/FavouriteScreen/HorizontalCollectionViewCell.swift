@@ -9,12 +9,15 @@ import UIKit
 
 class HorizontalCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var midView: UIView!
     @IBOutlet weak var typeLabel: UILabel!
-
+    @IBOutlet weak var numberLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
 
         typeLabel.transform = CGAffineTransform(rotationAngle: Double.pi/4)
+        typeLabel.adjustsFontSizeToFitWidth = true
 
     }
 
