@@ -56,7 +56,8 @@ final class TheoryViewController: UIViewController {
             .center()
         
         titleOfScreen.pin
-            .topCenter(60)
+            .top(view.pin.safeArea.top)
+            .hCenter()
             .sizeToFit()
         
         titleInfo.pin.below(of: titleOfScreen)
@@ -111,6 +112,7 @@ extension TheoryViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         self.open(with: theoryUrls[indexPath.row], title: theoryNames[indexPath.row])
     }
     

@@ -22,6 +22,7 @@ final class TabBarController: UITabBarController {
         exerciseVC.title = "Задачи"
         theoryVC.title = "Теория"
         settingsVC.title = "Настройки"
+//        self.tabBar.backgroundColor = .tertiarySystemFill
         
         let arrayVC : [UIViewController] = [favouriteVC,exerciseVC,theoryVC,settingsVC]
         

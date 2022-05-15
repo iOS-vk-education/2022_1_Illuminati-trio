@@ -52,6 +52,16 @@ final class ExerciseDetViewController: UIViewController {
 
         tableView.register(.init(nibName: "UIViewTableViewCell", bundle: nil), forCellReuseIdentifier: "UIViewTableViewCell")
         
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didUpdateTable),
+                                               name: FavouriteManager.favouritesNotificationKey,
+                                               object: nil)
+        
+    }
+    
+    @objc
+    private func didUpdateTable() {
+        tableView.reloadData()
     }
     
     @objc
@@ -84,12 +94,17 @@ extension ExerciseDetViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "UIViewTableViewCell", for: indexPath)
                 as? UIViewTableViewCell else { return .init() }
+        if FavouriteManager.shared.isFavourite(with: ExerciseNumbers[indexPath.row]) {
+            cell.starIcon.isHidden = false
+        }
         cell.textLabel?.text = "Задача № " + ExerciseNumbers[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        print("Section \(indexPath.section) Row: \(indexPath.row )")
+        tableView.deselectRow(at: indexPath, animated: true)
+        FavouriteManager.shared.addLastSeen(with: ExerciseNumbers[indexPath.row])
         let viewC = DetailsViewController(number: "\(ExerciseNumbers[indexPath.row])")
         navigationController?.pushViewController(viewC, animated: true)
     }
