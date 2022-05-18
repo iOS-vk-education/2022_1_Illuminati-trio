@@ -13,6 +13,10 @@ final class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        let viewC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginV")
+//        
+//        self.window?.rootViewController?.present(viewC, animated: false)
+        
         let favouriteVC = FavouriteViewController()
         let exerciseVC = ExerciseViewController()
         let theoryVC = TheoryViewController()

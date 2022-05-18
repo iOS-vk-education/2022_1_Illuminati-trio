@@ -8,7 +8,7 @@
 import Foundation
 import WebKit
 
-final class TheoryDetailsViewController: ViewController {
+final class TheoryDetailsViewController: UIViewController {
     
     let activityIndicator = UIActivityIndicatorView(style: .large)
     
@@ -46,6 +46,11 @@ final class TheoryDetailsViewController: ViewController {
         guard let url = URL(string: urlString) else {return}
         
         webView.load(URLRequest(url: url))
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        webView.frame = view.bounds
     }
  
     @objc

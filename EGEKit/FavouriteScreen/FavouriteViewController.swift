@@ -27,6 +27,7 @@ class FavouriteViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
+        print(NetworkManager.userEmail)
         titleOfScreen.text = "Избранное"
         titleOfScreen.font = .boldSystemFont(ofSize: 20)
         
@@ -42,7 +43,6 @@ class FavouriteViewController: UIViewController {
         hCollectionTitle.text = "Недавно просмотренные"
         hCollectionTitle.font = .systemFont(ofSize: 16)
     
-//        hCollectionView.backgroundColor = .tertiarySystemFill
         hCollectionView.delegate = self
         hCollectionView.dataSource = self
         hCollectionView.register(HorizontalCollectionViewCell1.self, forCellWithReuseIdentifier: "HorizontalCollectionViewCell1")

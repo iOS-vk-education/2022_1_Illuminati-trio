@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 protocol FavouriteManagerDescription {
+    func getFavourites()
     func addLastSeen(with number: String)
     func markAsFavourite(with number: String)
     func deleteFromFavourite(with number: String)
@@ -19,14 +21,28 @@ final class FavouriteManager: FavouriteManagerDescription {
     
     static let favouritesKey: String = "IlumintatiTrio.EGEKit.Favourites"
     static let recentsKey: String = "IlumintatiTrio.EGEKit.Recents"
-
     
     static let favouritesNotificationKey = NSNotification.Name("IlumintatiTrio.EGEKit.Favourite.notifyFav")
     static let recentsNotificationKey = NSNotification.Name("IlumintatiTrio.EGEKit.Favourite.notifyRecents")
     
     static let shared = FavouriteManager()
     
+    let db = NetworkManager.shared.db
+
     private init(){}
+    
+    func getFavourites() {
+        Task {
+            let favNumbers = await NetworkManager.shared.loadFavourites(with: NetworkManager.userEmail)
+            
+            UserDefaults.standard.set(favNumbers, forKey: FavouriteManager.favouritesKey)
+            
+            DispatchQueue.main.async {
+            NotificationCenter.default.post(name: FavouriteManager.favouritesNotificationKey, object: nil)
+            }
+
+        }
+    }
     
     func addLastSeen(with number: String) {
         var lastSeen: [String] = (UserDefaults.standard.array(forKey: Self.recentsKey) as? [String]) ?? []
@@ -61,8 +77,13 @@ final class FavouriteManager: FavouriteManagerDescription {
         favouriteNumber.append(number)
         
         UserDefaults.standard.set(favouriteNumber, forKey: Self.favouritesKey)
-        
+                
         NotificationCenter.default.post(name: Self.favouritesNotificationKey, object: nil)
+        
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.db!.collection("users").document(NetworkManager.userEmail).setData(["fav":favouriteNumber])
+        }
+        
     }
     
     func deleteFromFavourite(with number: String) {
@@ -71,10 +92,13 @@ final class FavouriteManager: FavouriteManagerDescription {
         if let indexToRemove = favouriteNumber.firstIndex(of: number) {
             favouriteNumber.remove(at: indexToRemove)
         }
-        
+                
         UserDefaults.standard.set(favouriteNumber, forKey: Self.favouritesKey)
-        
+                
         NotificationCenter.default.post(name: Self.favouritesNotificationKey, object: nil)
+        
+        db!.collection("users").document(NetworkManager.userEmail).setData(["fav":favouriteNumber])
+
     }
     
     func eraseFavourites() {
@@ -83,8 +107,11 @@ final class FavouriteManager: FavouriteManagerDescription {
         favouriteNumber.removeAll()
         
         UserDefaults.standard.set(favouriteNumber, forKey: Self.favouritesKey)
-        
+                
         NotificationCenter.default.post(name: Self.favouritesNotificationKey, object: nil)
+        
+        db!.collection("users").document(NetworkManager.userEmail).setData(["fav":favouriteNumber])
+
     }
     
 }

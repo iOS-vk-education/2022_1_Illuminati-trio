@@ -10,12 +10,12 @@ import UIKit
 import WebKit
 import PinLayout
 
-final class DetailsViewController: ViewController {
+final class DetailsViewController: UIViewController {
     
     private let number: String
     private var htmlUslovie: String = ""
     private var htmlSolution: String = ""
-    private let solutionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+    private let solutionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50))
     private let activityIndicator = UIActivityIndicatorView(style: .medium)
     private lazy var isFav = FavouriteManager.shared.isFavourite(with: number)
     
@@ -52,11 +52,22 @@ final class DetailsViewController: ViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: createFavButton())
                 
         solutionButton.configuration = setupSolButton()
+        solutionButton.applyShadow(cornerRadius: 5)
         
+        webViewSolution.isOpaque = false
+        webViewSolution.backgroundColor = .clear
+        webViewSolution.navigationDelegate = self
         webViewSolution.isHidden = true
         
+        webViewUslovie.isHidden = true
+        webViewUslovie.isOpaque = false
+        webViewUslovie.backgroundColor = .clear
         webViewUslovie.navigationDelegate = self
-        webViewUslovie.addSubview(activityIndicator)
+        
+        view.addSubview(activityIndicator)
+        
+        print(webViewUslovie.frame.height)
+
         
         [webViewUslovie,webViewSolution,solutionButton].forEach{
             self.view.addSubview($0)}
@@ -71,16 +82,18 @@ final class DetailsViewController: ViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        solutionButton.pin
-            .top(40%)
-            .left(5)
-            .sizeToFit()
+//        solutionButton.pin.center().sizeToFit()
+//
+//        solutionButton.isHidden = false
         
         webViewUslovie.pin
             .top()
             .left()
             .right()
-            .above(of: solutionButton)
+//            .above(of: solutionButton)
+        
+//        webViewUslovie.isHidden = false
+
         
         webViewSolution.pin
             .below(of: solutionButton)
@@ -89,6 +102,9 @@ final class DetailsViewController: ViewController {
             .bottom()
         
         activityIndicator.pin.center()
+        
+        setupShowSolutionLayout()
+        
     }
     
     @objc
@@ -110,6 +126,22 @@ final class DetailsViewController: ViewController {
             self.navigationController?.popToRootViewController(animated: true)
         } else {
             self.navigationController?.dismiss(animated: true)
+        }
+    }
+    
+    func setupShowSolutionLayout() {
+        webViewUslovie.evaluateJavaScript("document.documentElement.scrollHeight") { (height, error) in
+            let height2 = height as? CGFloat ?? 200
+            
+            self.webViewUslovie.pin.height(self.view.pin.safeArea.top + height2)
+            self.webViewUslovie.isHidden = false
+
+            self.solutionButton.pin
+                .below(of: self.webViewUslovie)
+                .left(self.view.pin.safeArea.left + 5)
+                .sizeToFit()
+            
+            self.solutionButton.isHidden = false
         }
     }
     
@@ -139,6 +171,7 @@ final class DetailsViewController: ViewController {
         Task {
             let result = await NetworkManager.shared.loadUslovieAndSolution(at: number)
             let align = "<meta name=\"viewport\" content=\"width=device-width\">"
+            
             htmlUslovie = align + result.0
             htmlSolution = align + result.1
             
@@ -160,8 +193,15 @@ final class DetailsViewController: ViewController {
 }
 
 extension DetailsViewController: WKNavigationDelegate {
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         activityIndicator.stopAnimating()
-        solutionButton.isHidden = false
+        
+        let cssSttring = ":root {color-scheme: light dark;}@media (prefers-color-scheme: dark) {img {filter: invert(100%)}}"
+        let jsString = "var style = document.createElement('style'); style.innerHTML = '\(cssSttring)'; document.head.appendChild(style);"
+        webView.evaluateJavaScript(jsString, completionHandler: nil)
+        
+        setupShowSolutionLayout()
+        
     }
 }

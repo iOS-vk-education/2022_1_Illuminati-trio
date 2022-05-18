@@ -96,6 +96,8 @@ extension ExerciseDetViewController: UITableViewDelegate, UITableViewDataSource 
                 as? UIViewTableViewCell else { return .init() }
         if FavouriteManager.shared.isFavourite(with: ExerciseNumbers[indexPath.row]) {
             cell.starIcon.isHidden = false
+        } else {
+            cell.starIcon.isHidden = true
         }
         cell.textLabel?.text = "Задача № " + ExerciseNumbers[indexPath.row]
         return cell
