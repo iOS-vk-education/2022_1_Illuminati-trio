@@ -32,7 +32,11 @@ final class TheoryDetailsViewController: UIViewController {
         super.viewDidLoad()
         self.title = title0
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(goBack))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.left"),
+            style: .plain,
+            target: self,
+            action: #selector(goBack))
         
         view.addSubview(webView)
         view.addSubview(activityIndicator)
@@ -40,7 +44,6 @@ final class TheoryDetailsViewController: UIViewController {
         activityIndicator.startAnimating()
         activityIndicator.center = self.view.center
         
-        webView.frame = view.bounds
         webView.navigationDelegate = self
         
         guard let url = URL(string: urlString) else {return}

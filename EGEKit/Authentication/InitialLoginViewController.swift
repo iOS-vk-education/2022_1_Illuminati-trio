@@ -19,7 +19,7 @@ final class InitialLoginViewController: UIViewController {
         
         loginButton.tintColor = .secondarySystemGroupedBackground
         
-        createLayer()
+//        createLayer()
     }
     
     override func viewDidLayoutSubviews() {

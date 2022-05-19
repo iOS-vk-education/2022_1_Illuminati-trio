@@ -42,6 +42,7 @@
 		CE902B64282C01600037E2AB /* InitialLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE902B63282C01600037E2AB /* InitialLoginViewController.swift */; };
 		CE902B66282D31130037E2AB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE902B65282D31130037E2AB /* CustomButton.swift */; };
 		CE902B68282E5F5D0037E2AB /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE902B67282E5F5B0037E2AB /* RegistrationViewController.swift */; };
+		CE9B0AFD28365C3A00C723F9 /* TheoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0AFC28365C3900C723F9 /* TheoryModel.swift */; };
 		CEB33994280B431500476B97 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB33993280B431500476B97 /* NetworkManager.swift */; };
 		CEB33996280B608E00476B97 /* TheoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB33995280B608E00476B97 /* TheoryDetailsViewController.swift */; };
 		CEE81B3F28147F2400E2238C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEE81B3E28147F2400E2238C /* GoogleService-Info.plist */; };
@@ -74,6 +75,7 @@
 		CE902B63282C01600037E2AB /* InitialLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialLoginViewController.swift; sourceTree = "<group>"; };
 		CE902B65282D31130037E2AB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		CE902B67282E5F5B0037E2AB /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		CE9B0AFC28365C3900C723F9 /* TheoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheoryModel.swift; sourceTree = "<group>"; };
 		CEB33993280B431500476B97 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CEB33995280B608E00476B97 /* TheoryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheoryDetailsViewController.swift; sourceTree = "<group>"; };
 		CEE81B3E28147F2400E2238C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 		CEAB0B71282322EE000F0FC4 /* Theory */ = {
 			isa = PBXGroup;
 			children = (
+				CE9B0AFC28365C3900C723F9 /* TheoryModel.swift */,
 				CE2D65A028076B240012A4D8 /* TheoryViewController.swift */,
 				CEB33995280B608E00476B97 /* TheoryDetailsViewController.swift */,
 			);
@@ -296,6 +299,7 @@
 				CE2D659D280769030012A4D8 /* ExerciseViewController.swift in Sources */,
 				CEB33996280B608E00476B97 /* TheoryDetailsViewController.swift in Sources */,
 				CE902B64282C01600037E2AB /* InitialLoginViewController.swift in Sources */,
+				CE9B0AFD28365C3A00C723F9 /* TheoryModel.swift in Sources */,
 				CE902B68282E5F5D0037E2AB /* RegistrationViewController.swift in Sources */,
 				CE6DA43428061355003D1BFC /* SceneDelegate.swift in Sources */,
 				CE902B6028282F7E0037E2AB /* LoginViewController.swift in Sources */,
