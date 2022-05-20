@@ -47,6 +47,8 @@
 		CE9B0B012836B36900C723F9 /* FavouritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0B002836B36800C723F9 /* FavouritePresenter.swift */; };
 		CEB33994280B431500476B97 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB33993280B431500476B97 /* NetworkManager.swift */; };
 		CEB33996280B608E00476B97 /* TheoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB33995280B608E00476B97 /* TheoryDetailsViewController.swift */; };
+		CEE5048128381506006B4CEB /* ExerciseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5048028381505006B4CEB /* ExerciseModel.swift */; };
+		CEE504832838163E006B4CEB /* ExercisePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE504822838163D006B4CEB /* ExercisePresenter.swift */; };
 		CEE81B3F28147F2400E2238C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEE81B3E28147F2400E2238C /* GoogleService-Info.plist */; };
 		CEE81B842816B46700E2238C /* FirebaseStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE81B832816B46700E2238C /* FirebaseStructs.swift */; };
 		CEE81B862816BE8700E2238C /* SectionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE81B852816BE8700E2238C /* SectionStruct.swift */; };
@@ -82,6 +84,8 @@
 		CE9B0B002836B36800C723F9 /* FavouritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePresenter.swift; sourceTree = "<group>"; };
 		CEB33993280B431500476B97 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CEB33995280B608E00476B97 /* TheoryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheoryDetailsViewController.swift; sourceTree = "<group>"; };
+		CEE5048028381505006B4CEB /* ExerciseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseModel.swift; sourceTree = "<group>"; };
+		CEE504822838163D006B4CEB /* ExercisePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePresenter.swift; sourceTree = "<group>"; };
 		CEE81B3E28147F2400E2238C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CEE81B832816B46700E2238C /* FirebaseStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStructs.swift; sourceTree = "<group>"; };
 		CEE81B852816BE8700E2238C /* SectionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionStruct.swift; sourceTree = "<group>"; };
@@ -139,9 +143,9 @@
 				CE6DA43F28061357003D1BFC /* Info.plist */,
 				CE9B0AFB2833F54B00C723F9 /* Authentication */,
 				CE2D6596280767C30012A4D8 /* TabBarController.swift */,
-				CE902B17282453670037E2AB /* FavouriteScreen */,
-				CEAB0B70282322B9000F0FC4 /* Exercise */,
-				CEAB0B71282322EE000F0FC4 /* Theory */,
+				CE902B17282453670037E2AB /* FavouriteTab */,
+				CEAB0B70282322B9000F0FC4 /* ExerciseTab */,
+				CEAB0B71282322EE000F0FC4 /* TheoryTab */,
 				CE2D659E280769800012A4D8 /* SettingsViewController.swift */,
 				CEB33993280B431500476B97 /* NetworkManager.swift */,
 				CEE81B832816B46700E2238C /* FirebaseStructs.swift */,
@@ -151,7 +155,7 @@
 			path = EGEKit;
 			sourceTree = "<group>";
 		};
-		CE902B17282453670037E2AB /* FavouriteScreen */ = {
+		CE902B17282453670037E2AB /* FavouriteTab */ = {
 			isa = PBXGroup;
 			children = (
 				CE2D6598280768690012A4D8 /* FavouriteViewController.swift */,
@@ -161,7 +165,7 @@
 				CE902B142824535A0037E2AB /* HorizontalCollectionViewCell.xib */,
 				CE902B132824535A0037E2AB /* HorizontalCollectionViewCell.swift */,
 			);
-			path = FavouriteScreen;
+			path = FavouriteTab;
 			sourceTree = "<group>";
 		};
 		CE9B0AFB2833F54B00C723F9 /* Authentication */ = {
@@ -175,26 +179,36 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-		CEAB0B70282322B9000F0FC4 /* Exercise */ = {
+		CEAB0B70282322B9000F0FC4 /* ExerciseTab */ = {
 			isa = PBXGroup;
 			children = (
-				CE2D659C280769030012A4D8 /* ExerciseViewController.swift */,
+				CEE50484283824C4006B4CEB /* Exercise - RootScreen */,
 				CE8B74A0280ED718002E32A3 /* ExerciseDetViewCotroller.swift */,
 				CE8B74AB2810033A002E32A3 /* DetailsViewController.swift */,
 				CE8B74A7280EE512002E32A3 /* UIViewTableViewCell.swift */,
 				CE8B74A8280EE512002E32A3 /* UIViewTableViewCell.xib */,
 			);
-			path = Exercise;
+			path = ExerciseTab;
 			sourceTree = "<group>";
 		};
-		CEAB0B71282322EE000F0FC4 /* Theory */ = {
+		CEAB0B71282322EE000F0FC4 /* TheoryTab */ = {
 			isa = PBXGroup;
 			children = (
 				CE9B0AFC28365C3900C723F9 /* TheoryModel.swift */,
 				CE2D65A028076B240012A4D8 /* TheoryViewController.swift */,
 				CEB33995280B608E00476B97 /* TheoryDetailsViewController.swift */,
 			);
-			path = Theory;
+			path = TheoryTab;
+			sourceTree = "<group>";
+		};
+		CEE50484283824C4006B4CEB /* Exercise - RootScreen */ = {
+			isa = PBXGroup;
+			children = (
+				CEE5048028381505006B4CEB /* ExerciseModel.swift */,
+				CEE504822838163D006B4CEB /* ExercisePresenter.swift */,
+				CE2D659C280769030012A4D8 /* ExerciseViewController.swift */,
+			);
+			path = "Exercise - RootScreen";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,6 +312,7 @@
 				CE8B74A9280EE512002E32A3 /* UIViewTableViewCell.swift in Sources */,
 				CEB33994280B431500476B97 /* NetworkManager.swift in Sources */,
 				CE2D6597280767C30012A4D8 /* TabBarController.swift in Sources */,
+				CEE5048128381506006B4CEB /* ExerciseModel.swift in Sources */,
 				CE9B0B012836B36900C723F9 /* FavouritePresenter.swift in Sources */,
 				CE2D659F280769800012A4D8 /* SettingsViewController.swift in Sources */,
 				CE902B152824535B0037E2AB /* HorizontalCollectionViewCell.swift in Sources */,
@@ -310,6 +325,7 @@
 				CE9B0AFD28365C3A00C723F9 /* TheoryModel.swift in Sources */,
 				CE902B68282E5F5D0037E2AB /* RegistrationViewController.swift in Sources */,
 				CE6DA43428061355003D1BFC /* SceneDelegate.swift in Sources */,
+				CEE504832838163E006B4CEB /* ExercisePresenter.swift in Sources */,
 				CE902B6028282F7E0037E2AB /* LoginViewController.swift in Sources */,
 				CE8B74AC2810033A002E32A3 /* DetailsViewController.swift in Sources */,
 				CE2D65A128076B240012A4D8 /* TheoryViewController.swift in Sources */,

@@ -41,6 +41,10 @@ final class FavouritePresenter {
         return model.favouriteNumber
     }
     
+    func didPressErase() {
+        FavouriteManager.shared.eraseFavourites()
+    }
+    
     func didSelectFavRow(at index: Int) {
         self.viewController?.openExercise(with: favouriteNumber[index])
         favouriteManager.addLastSeen(with: favouriteNumber[index])

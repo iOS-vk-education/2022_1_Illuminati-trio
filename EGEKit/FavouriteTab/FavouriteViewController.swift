@@ -106,7 +106,7 @@ class FavouriteViewController: UIViewController {
     
     @objc
     private func eraseFavourites() {
-        FavouriteManager.shared.eraseFavourites()
+        presenter.didPressErase()
     }
     
     func openExercise(with number: String) {
