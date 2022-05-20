@@ -57,6 +57,7 @@ class FavouriteViewController: UIViewController {
             self.view.addSubview($0)}
         
         presenter.viewController = self
+        presenter.didLoadView()
         
     }
     

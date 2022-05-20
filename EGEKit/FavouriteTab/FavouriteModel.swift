@@ -25,4 +25,12 @@ final class FavouriteModel {
         }
     }
     
+    func addLastSeen(with favouriteNumber: String) {
+        FavouriteManager.shared.addLastSeen(with: favouriteNumber)
+    }
+    
+    func eraseFavourites() {
+        FavouriteManager.shared.eraseFavourites()
+    }
+    
 }

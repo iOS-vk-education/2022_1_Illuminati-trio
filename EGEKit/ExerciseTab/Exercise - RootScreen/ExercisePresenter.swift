@@ -24,16 +24,9 @@ final class ExercisePresenter {
     func giveCellText(at indexPath: IndexPath) -> String {
         var cellText = ""
         if indexPath.row == 0 {
-//            let font = UIFont.systemFont(ofSize: 16, weight: .bold)
-//            cell.containerView.layer.borderColor = UIColor.systemGray4.cgColor
-//            cell.containerView.layer.borderWidth = 0.5
-//            cell.textLabel?.font = font
             cellText = "\(indexPath.section + 1). " + sections[indexPath.section].title
         }
         else {
-//            cell.containerView.layer.borderWidth = 0.0
-//            let font = UIFont.systemFont(ofSize: 15, weight: .light)
-//            cell.textLabel?.font = font
             cellText = " - " + sections[indexPath.section].options[indexPath.row - 1]
         }
         return cellText

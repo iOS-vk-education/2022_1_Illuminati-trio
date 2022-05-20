@@ -28,15 +28,9 @@ final class ExerciseModel {
                 sections.append(Section(title: sectionNames[i], options: subExNames[i] ) )
             }
             
-            DispatchQueue.main.async { [self] in
-                completion(sections)
+            DispatchQueue.main.async {
+                completion(self.sections)
             }
-            
-//            tableView.reloadData()
-//            activityIndicator.stopAnimating()
-            
         }
     }
-    
-    
 }

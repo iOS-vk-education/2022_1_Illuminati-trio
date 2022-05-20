@@ -49,6 +49,8 @@
 		CEB33996280B608E00476B97 /* TheoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB33995280B608E00476B97 /* TheoryDetailsViewController.swift */; };
 		CEE5048128381506006B4CEB /* ExerciseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5048028381505006B4CEB /* ExerciseModel.swift */; };
 		CEE504832838163E006B4CEB /* ExercisePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE504822838163D006B4CEB /* ExercisePresenter.swift */; };
+		CEE50486283829AF006B4CEB /* ExerciseDetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE50485283829AF006B4CEB /* ExerciseDetModel.swift */; };
+		CEE50488283829BF006B4CEB /* ExerciseDetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE50487283829BF006B4CEB /* ExerciseDetPresenter.swift */; };
 		CEE81B3F28147F2400E2238C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEE81B3E28147F2400E2238C /* GoogleService-Info.plist */; };
 		CEE81B842816B46700E2238C /* FirebaseStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE81B832816B46700E2238C /* FirebaseStructs.swift */; };
 		CEE81B862816BE8700E2238C /* SectionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE81B852816BE8700E2238C /* SectionStruct.swift */; };
@@ -86,6 +88,8 @@
 		CEB33995280B608E00476B97 /* TheoryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheoryDetailsViewController.swift; sourceTree = "<group>"; };
 		CEE5048028381505006B4CEB /* ExerciseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseModel.swift; sourceTree = "<group>"; };
 		CEE504822838163D006B4CEB /* ExercisePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePresenter.swift; sourceTree = "<group>"; };
+		CEE50485283829AF006B4CEB /* ExerciseDetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetModel.swift; sourceTree = "<group>"; };
+		CEE50487283829BF006B4CEB /* ExerciseDetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetPresenter.swift; sourceTree = "<group>"; };
 		CEE81B3E28147F2400E2238C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CEE81B832816B46700E2238C /* FirebaseStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStructs.swift; sourceTree = "<group>"; };
 		CEE81B852816BE8700E2238C /* SectionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionStruct.swift; sourceTree = "<group>"; };
@@ -183,7 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				CEE50484283824C4006B4CEB /* Exercise - RootScreen */,
-				CE8B74A0280ED718002E32A3 /* ExerciseDetViewCotroller.swift */,
+				CEE50489283829C6006B4CEB /* ExerciseDet - modal 0 */,
 				CE8B74AB2810033A002E32A3 /* DetailsViewController.swift */,
 				CE8B74A7280EE512002E32A3 /* UIViewTableViewCell.swift */,
 				CE8B74A8280EE512002E32A3 /* UIViewTableViewCell.xib */,
@@ -204,11 +208,21 @@
 		CEE50484283824C4006B4CEB /* Exercise - RootScreen */ = {
 			isa = PBXGroup;
 			children = (
-				CEE5048028381505006B4CEB /* ExerciseModel.swift */,
-				CEE504822838163D006B4CEB /* ExercisePresenter.swift */,
 				CE2D659C280769030012A4D8 /* ExerciseViewController.swift */,
+				CEE504822838163D006B4CEB /* ExercisePresenter.swift */,
+				CEE5048028381505006B4CEB /* ExerciseModel.swift */,
 			);
 			path = "Exercise - RootScreen";
+			sourceTree = "<group>";
+		};
+		CEE50489283829C6006B4CEB /* ExerciseDet - modal 0 */ = {
+			isa = PBXGroup;
+			children = (
+				CE8B74A0280ED718002E32A3 /* ExerciseDetViewCotroller.swift */,
+				CEE50487283829BF006B4CEB /* ExerciseDetPresenter.swift */,
+				CEE50485283829AF006B4CEB /* ExerciseDetModel.swift */,
+			);
+			path = "ExerciseDet - modal 0";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE81B862816BE8700E2238C /* SectionStruct.swift in Sources */,
+				CEE50486283829AF006B4CEB /* ExerciseDetModel.swift in Sources */,
 				CE902B66282D31130037E2AB /* CustomButton.swift in Sources */,
 				CE902B19282546520037E2AB /* FavouriteManager.swift in Sources */,
 				CE9B0AFF2836712B00C723F9 /* FavouriteModel.swift in Sources */,
@@ -329,6 +344,7 @@
 				CE902B6028282F7E0037E2AB /* LoginViewController.swift in Sources */,
 				CE8B74AC2810033A002E32A3 /* DetailsViewController.swift in Sources */,
 				CE2D65A128076B240012A4D8 /* TheoryViewController.swift in Sources */,
+				CEE50488283829BF006B4CEB /* ExerciseDetPresenter.swift in Sources */,
 				CEE81B842816B46700E2238C /* FirebaseStructs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

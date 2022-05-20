@@ -18,7 +18,7 @@ protocol FavouriteManagerDescription {
 }
 
 final class FavouriteManager: FavouriteManagerDescription {
-    var model = FavouriteModel()
+    let model = FavouriteModel()
     
     static let favouritesKey: String = "IlumintatiTrio.EGEKit.Favourites"
     static let recentsKey: String = "IlumintatiTrio.EGEKit.Recents"
