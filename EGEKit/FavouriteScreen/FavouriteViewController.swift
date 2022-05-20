@@ -10,13 +10,13 @@ import UIKit
 import PinLayout
 
 class FavouriteViewController: UIViewController {
-    
+    private let presenter = FavouritePresenter()
     private let titleOfScreen = UILabel()
     private let hCollectionTitle = UILabel()
+    
     private let hCollectionView: UICollectionView = {
         let collectionLayout = UICollectionViewFlowLayout()
         collectionLayout.scrollDirection = .horizontal
-        
         return UICollectionView(frame: .zero, collectionViewLayout: collectionLayout)
     }()
     private let exerciseTableView = UITableView()
@@ -45,7 +45,7 @@ class FavouriteViewController: UIViewController {
     
         hCollectionView.delegate = self
         hCollectionView.dataSource = self
-        hCollectionView.register(HorizontalCollectionViewCell1.self, forCellWithReuseIdentifier: "HorizontalCollectionViewCell1")
+//        hCollectionView.register(HorizontalCollectionViewCell1.self, forCellWithReuseIdentifier: "HorizontalCollectionViewCell1")
         hCollectionView.register(.init(nibName: "HorizontalCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HorizontalCollectionViewCell")
 
         exerciseTableView.separatorStyle = .none
@@ -56,15 +56,7 @@ class FavouriteViewController: UIViewController {
         [eraseFav,tableViewLabel,titleOfScreen,hCollectionView,hCollectionTitle,exerciseTableView].forEach{
             self.view.addSubview($0)}
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didUpdateTable),
-                                               name: FavouriteManager.favouritesNotificationKey,
-                                               object: nil)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didUpdateCollection),
-                                               name: FavouriteManager.recentsNotificationKey,
-                                               object: nil)
+        presenter.viewController = self
         
     }
     
@@ -104,14 +96,12 @@ class FavouriteViewController: UIViewController {
             .right().sizeToFit()
     }
     
-    @objc
-    private func didUpdateTable() {
-        exerciseTableView.reloadData()
+    func reloadRecents() {
+        hCollectionView.reloadData()
     }
     
-    @objc
-    private func didUpdateCollection() {
-        hCollectionView.reloadData()
+    func reloadFavourites() {
+        exerciseTableView.reloadData()
     }
     
     @objc
@@ -119,7 +109,7 @@ class FavouriteViewController: UIViewController {
         FavouriteManager.shared.eraseFavourites()
     }
     
-    private func openExercise(with number: String) {
+    func openExercise(with number: String) {
         let viewC = DetailsViewController(number: "\(number)")
         let navC = UINavigationController(rootViewController: viewC)
         present(navC, animated: true)
@@ -129,17 +119,12 @@ class FavouriteViewController: UIViewController {
 extension FavouriteViewController: UICollectionViewDelegate, UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let lastSeen: [String] = (UserDefaults.standard.array(forKey: FavouriteManager.recentsKey) as? [String]) ?? []
-
-        openExercise(with: lastSeen[indexPath.row])
-        FavouriteManager.shared.addLastSeen(with: lastSeen[indexPath.row])
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return presenter.lastSeen.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let lastSeen: [String] = (UserDefaults.standard.array(forKey: FavouriteManager.recentsKey) as? [String]) ?? []
-
-        return lastSeen.count
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter.didSelectLastSeen(at: indexPath.row)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -163,10 +148,8 @@ UICollectionViewDelegateFlowLayout {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: "HorizontalCollectionViewCell", for: indexPath) as? HorizontalCollectionViewCell else { return .init() }
         
-        let lastSeen: [String] = (UserDefaults.standard.array(forKey: FavouriteManager.recentsKey) as? [String]) ?? []
-        
         cell.typeLabel.text = "Задача"
-        cell.numberLabel.text = lastSeen[indexPath.row]
+        cell.numberLabel.text = presenter.lastSeen[indexPath.row]
         
         return cell
     }
@@ -180,61 +163,54 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let favouriteNumber: [String] = (UserDefaults.standard.array(forKey: FavouriteManager.favouritesKey) as? [String]) ?? []
-        
-        return favouriteNumber.count
+        return presenter.favouriteNumber.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "UIViewTableViewCell", for: indexPath) as? UIViewTableViewCell else { return .init() }
-        let favouriteNumber: [String] = (UserDefaults.standard.array(forKey: FavouriteManager.favouritesKey) as? [String]) ?? []
 
-        cell.textLabel?.text = "Задача № " + favouriteNumber[indexPath.row]
+        cell.textLabel?.text = "Задача № " + presenter.favouriteNumber[indexPath.row]
 
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let favouriteNumber: [String] = (UserDefaults.standard.array(forKey: FavouriteManager.favouritesKey) as? [String]) ?? []
-        
-        openExercise(with: favouriteNumber[indexPath.row])
-        FavouriteManager.shared.addLastSeen(with: favouriteNumber[indexPath.row])
-
+        presenter.didSelectFavRow(at: indexPath.row)
     }
 
 }
 
 
 
-class HorizontalCollectionViewCell1: UICollectionViewCell {
-
-    private var cellLabel = UILabel()
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-//        backgroundColor = .systemIndigo
-        let grayView: UIView = .init(frame: frame)
-        grayView.backgroundColor = .red
-        cellLabel.text = "Test"
-        cellLabel.textColor = .white
-        self.addSubview(grayView)
-        self.addSubview(cellLabel)
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        cellLabel.pin
-            .bottomCenter()
-            .sizeToFit()
-
-//        grayView.pin.center()
-    }
-
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
+//class HorizontalCollectionViewCell1: UICollectionViewCell {
+//
+//    private var cellLabel = UILabel()
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+////        backgroundColor = .systemIndigo
+//        let grayView: UIView = .init(frame: frame)
+//        grayView.backgroundColor = .red
+//        cellLabel.text = "Test"
+//        cellLabel.textColor = .white
+//        self.addSubview(grayView)
+//        self.addSubview(cellLabel)
+//    }
+//
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        cellLabel.pin
+//            .bottomCenter()
+//            .sizeToFit()
+//
+////        grayView.pin.center()
+//    }
+//
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//}
 
 
         

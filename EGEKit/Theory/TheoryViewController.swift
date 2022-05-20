@@ -15,8 +15,8 @@ final class TheoryViewController: UIViewController {
     private let titleOfScreen = UILabel()
     private let titleInfo = UILabel()
     private var tableView = UITableView()
-    var fontSize: CGFloat = 16
-    let activityIndicator = UIActivityIndicatorView(style: .large)
+    private var fontSize: CGFloat = 16
+    private let activityIndicator = UIActivityIndicatorView(style: .large)
     
 
     override func viewDidLoad() {
@@ -33,8 +33,6 @@ final class TheoryViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(.init(nibName: "UIViewTableViewCell", bundle: nil), forCellReuseIdentifier: "UIViewTableViewCell")
         tableView.separatorStyle = .none
-
-//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         [tableView,titleOfScreen,titleInfo,activityIndicator].forEach{self.view.addSubview($0)}
         
@@ -81,7 +79,6 @@ final class TheoryViewController: UIViewController {
             return
         }
         self.fontSize = fontSize * gestureRecognizer.scale
-//        print(fontSize)
         gestureRecognizer.scale = 1
 
         tableView.reloadData()

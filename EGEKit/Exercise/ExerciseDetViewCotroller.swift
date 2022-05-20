@@ -33,7 +33,6 @@ final class ExerciseDetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = title0
-//        tableView.backgroundColor = .systemGray6
         
         [tableView,activityIndicator].forEach{self.view.addSubview($0)}
 
@@ -104,7 +103,6 @@ extension ExerciseDetViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("Section \(indexPath.section) Row: \(indexPath.row )")
         tableView.deselectRow(at: indexPath, animated: true)
         FavouriteManager.shared.addLastSeen(with: ExerciseNumbers[indexPath.row])
         let viewC = DetailsViewController(number: "\(ExerciseNumbers[indexPath.row])")
