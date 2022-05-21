@@ -10,20 +10,17 @@ import UIKit
 import PinLayout
 
 final class TheoryViewController: UIViewController {
+    private let model = TheoryModel()
     
     private let titleOfScreen = UILabel()
     private let titleInfo = UILabel()
     private var tableView = UITableView()
-    var theoryNames: [String] = []
-    var theoryUrls: [String] = []
-    var fontSize: CGFloat = 16
-    let activityIndicator = UIActivityIndicatorView(style: .large)
+    private var fontSize: CGFloat = 16
+    private let activityIndicator = UIActivityIndicatorView(style: .large)
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        getNamesUrls()
         
         titleOfScreen.text = "Полезный материал"
         titleOfScreen.font = .boldSystemFont(ofSize: 20)
@@ -36,8 +33,6 @@ final class TheoryViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(.init(nibName: "UIViewTableViewCell", bundle: nil), forCellReuseIdentifier: "UIViewTableViewCell")
         tableView.separatorStyle = .none
-
-//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         [tableView,titleOfScreen,titleInfo,activityIndicator].forEach{self.view.addSubview($0)}
         
@@ -47,6 +42,11 @@ final class TheoryViewController: UIViewController {
         
         let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch))
         view.addGestureRecognizer(pinchRecognizer)
+        
+        model.getNamesUrls { [weak self] in
+            self?.tableView.reloadData()
+            self?.activityIndicator.stopAnimating()
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -79,21 +79,9 @@ final class TheoryViewController: UIViewController {
             return
         }
         self.fontSize = fontSize * gestureRecognizer.scale
-//        print(fontSize)
         gestureRecognizer.scale = 1
 
         tableView.reloadData()
-    }
-    
-    private func getNamesUrls() {
-        Task {
-            let result = await NetworkManager.shared.loadTheoryNamesAndUrls()
-            
-            theoryNames = result.0
-            theoryUrls = result.1
-            tableView.reloadData()
-            activityIndicator.stopAnimating()
-        }
     }
     
     private func open(with urlString: String, title: String) {
@@ -113,12 +101,12 @@ extension TheoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        self.open(with: theoryUrls[indexPath.row], title: theoryNames[indexPath.row])
+        self.open(with: model.theoryUrls[indexPath.row], title: model.theoryNames[indexPath.row])
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        theoryNames.count
+        model.theoryNames.count
     }
     
     
@@ -132,7 +120,7 @@ extension TheoryViewController: UITableViewDelegate, UITableViewDataSource {
         
         let font = UIFont.systemFont(ofSize: self.fontSize, weight: .regular)
         
-        cell.textLabel?.text = theoryNames[indexPath.row]
+        cell.textLabel?.text = model.theoryNames[indexPath.row]
         cell.textLabel?.font = font
         
         return cell

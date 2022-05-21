@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 
 final class ExerciseDetViewController: UIViewController {
+    private let presenter = ExerciseDetPresenter()
     
     private let title0: String
     private var tableView = UITableView()
@@ -33,30 +34,18 @@ final class ExerciseDetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = title0
-//        tableView.backgroundColor = .systemGray6
         
         [tableView,activityIndicator].forEach{self.view.addSubview($0)}
-
-        tableView.separatorStyle = .none
         
-        tableView.frame = view.bounds
-        tableView.delegate = self
-        tableView.dataSource = self
+        setupTable()
         
         activityIndicator.startAnimating()
         activityIndicator.center = self.view.center
         
-        getInformation()
-        
+        presenter.viewController = self
+        presenter.didLoadView(with: title0)
+                
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(goBack))
-
-        tableView.register(.init(nibName: "UIViewTableViewCell", bundle: nil), forCellReuseIdentifier: "UIViewTableViewCell")
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didUpdateTable),
-                                               name: FavouriteManager.favouritesNotificationKey,
-                                               object: nil)
-        
     }
     
     @objc
@@ -70,15 +59,33 @@ final class ExerciseDetViewController: UIViewController {
         self.navigationController?.dismiss(animated: true)
     }
     
-    func getInformation() {
-        Task {
-            let numbers = await NetworkManager.shared.loadExercises(with: title0, type: "Numbers")
-            ExerciseNumbers = numbers
-            tableView.reloadData()
-            activityIndicator.stopAnimating()
-        }
+    private func setupTable() {
+        tableView.separatorStyle = .none
+        tableView.frame = view.bounds
+        tableView.register(.init(nibName: "UIViewTableViewCell", bundle: nil),
+                           forCellReuseIdentifier: "UIViewTableViewCell")
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
+    func loadExercise(with number: String) {
+        FavouriteManager.shared.addLastSeen(with: number)
+        let viewC = DetailsViewController(number: "\(number)")
+        navigationController?.pushViewController(viewC, animated: true)
+    }
+    
+    func deselectRow(at indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func reloadData() {
+        tableView.reloadData()
+    }
+    
+    func stopActivityIndicator() {
+        activityIndicator.stopAnimating()
+    }
+
 }
 
 extension ExerciseDetViewController: UITableViewDelegate, UITableViewDataSource {
@@ -88,24 +95,20 @@ extension ExerciseDetViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        ExerciseNumbers.count
+        presenter.numbers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "UIViewTableViewCell", for: indexPath)
                 as? UIViewTableViewCell else { return .init() }
-        if FavouriteManager.shared.isFavourite(with: ExerciseNumbers[indexPath.row]) {
-            cell.starIcon.isHidden = false
-        }
-        cell.textLabel?.text = "Задача № " + ExerciseNumbers[indexPath.row]
+        
+        cell.starIcon.isHidden = !presenter.isFavourite(at: indexPath)
+        
+        cell.textLabel?.text = "Задача № " + presenter.numbers[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("Section \(indexPath.section) Row: \(indexPath.row )")
-        tableView.deselectRow(at: indexPath, animated: true)
-        FavouriteManager.shared.addLastSeen(with: ExerciseNumbers[indexPath.row])
-        let viewC = DetailsViewController(number: "\(ExerciseNumbers[indexPath.row])")
-        navigationController?.pushViewController(viewC, animated: true)
+        presenter.didSelectTable(at: indexPath)
     }
 }

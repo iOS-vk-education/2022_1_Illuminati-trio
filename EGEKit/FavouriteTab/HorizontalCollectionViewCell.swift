@@ -16,6 +16,8 @@ class HorizontalCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        midView.applyShadow(cornerRadius: 12)
+        
         typeLabel.transform = CGAffineTransform(rotationAngle: Double.pi/4)
         typeLabel.adjustsFontSizeToFitWidth = true
 

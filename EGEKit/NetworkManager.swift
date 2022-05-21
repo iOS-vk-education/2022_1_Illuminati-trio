@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 import FirebaseFirestoreSwift
+import FirebaseAuth
 
 enum NetworkError: Error {
     case badName
@@ -15,22 +16,41 @@ enum NetworkError: Error {
 }
 
 protocol NetworkManagerProtocol: AnyObject {
+    var db: Firestore! {get set}
+    func loadFavourites(with email: String) async -> [String]
     func loadUslovieAndSolution(at number: String) async -> (String,String)
     func loadExercises(with title: String, type: String) async -> [String]
     func loadTheoryNamesAndUrls() async -> ([String],[String])
     func loadNamesSubNames() async -> [ExerciseType]
 }
 
-final class NetworkManager : NetworkManagerProtocol {
-    var db: Firestore!
+class NetworkManager : NetworkManagerProtocol {
+    public var db: Firestore!
     
     static let shared: NetworkManagerProtocol = NetworkManager()
+    
+    public static var userEmail: String = "not logget yet"
     
     private init() {
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
     }
+    
+    func loadFavourites(with email: String) async -> [String] {
+        do {
+            let doc = try await self.db.collection("users")
+                .document(email)
+                .getDocument()
+            guard let favNumbers = doc.get("fav") as? [String] else {
+                throw NetworkError.badName
+            }
+            return favNumbers
+        } catch (let error) {
+            return ["\(error)"]
+            }
+    }
+    
     
     func loadUslovieAndSolution(at number: String) async -> (String,String) {
         do {

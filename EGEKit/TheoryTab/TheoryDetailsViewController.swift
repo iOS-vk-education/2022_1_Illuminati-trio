@@ -8,7 +8,7 @@
 import Foundation
 import WebKit
 
-final class TheoryDetailsViewController: ViewController {
+final class TheoryDetailsViewController: UIViewController {
     
     let activityIndicator = UIActivityIndicatorView(style: .large)
     
@@ -32,7 +32,11 @@ final class TheoryDetailsViewController: ViewController {
         super.viewDidLoad()
         self.title = title0
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(goBack))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.left"),
+            style: .plain,
+            target: self,
+            action: #selector(goBack))
         
         view.addSubview(webView)
         view.addSubview(activityIndicator)
@@ -40,12 +44,16 @@ final class TheoryDetailsViewController: ViewController {
         activityIndicator.startAnimating()
         activityIndicator.center = self.view.center
         
-        webView.frame = view.bounds
         webView.navigationDelegate = self
         
         guard let url = URL(string: urlString) else {return}
         
         webView.load(URLRequest(url: url))
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        webView.frame = view.bounds
     }
  
     @objc
