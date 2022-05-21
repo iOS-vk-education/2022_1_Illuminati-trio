@@ -42,6 +42,7 @@
 		CE902B64282C01600037E2AB /* InitialLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE902B63282C01600037E2AB /* InitialLoginViewController.swift */; };
 		CE902B66282D31130037E2AB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE902B65282D31130037E2AB /* CustomButton.swift */; };
 		CE902B68282E5F5D0037E2AB /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE902B67282E5F5B0037E2AB /* RegistrationViewController.swift */; };
+		CE91F04928391FCA009CCF08 /* NotificationBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91F04828391FCA009CCF08 /* NotificationBannerView.swift */; };
 		CE9B0AFD28365C3A00C723F9 /* TheoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0AFC28365C3900C723F9 /* TheoryModel.swift */; };
 		CE9B0AFF2836712B00C723F9 /* FavouriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0AFE2836712B00C723F9 /* FavouriteModel.swift */; };
 		CE9B0B012836B36900C723F9 /* FavouritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0B002836B36800C723F9 /* FavouritePresenter.swift */; };
@@ -51,6 +52,8 @@
 		CEE504832838163E006B4CEB /* ExercisePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE504822838163D006B4CEB /* ExercisePresenter.swift */; };
 		CEE50486283829AF006B4CEB /* ExerciseDetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE50485283829AF006B4CEB /* ExerciseDetModel.swift */; };
 		CEE50488283829BF006B4CEB /* ExerciseDetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE50487283829BF006B4CEB /* ExerciseDetPresenter.swift */; };
+		CEE5048F2838F1FA006B4CEB /* DetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5048E2838F1FA006B4CEB /* DetailsModel.swift */; };
+		CEE504912838F211006B4CEB /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE504902838F211006B4CEB /* DetailsPresenter.swift */; };
 		CEE81B3F28147F2400E2238C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEE81B3E28147F2400E2238C /* GoogleService-Info.plist */; };
 		CEE81B842816B46700E2238C /* FirebaseStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE81B832816B46700E2238C /* FirebaseStructs.swift */; };
 		CEE81B862816BE8700E2238C /* SectionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE81B852816BE8700E2238C /* SectionStruct.swift */; };
@@ -81,6 +84,7 @@
 		CE902B63282C01600037E2AB /* InitialLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialLoginViewController.swift; sourceTree = "<group>"; };
 		CE902B65282D31130037E2AB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		CE902B67282E5F5B0037E2AB /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		CE91F04828391FCA009CCF08 /* NotificationBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationBannerView.swift; sourceTree = "<group>"; };
 		CE9B0AFC28365C3900C723F9 /* TheoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheoryModel.swift; sourceTree = "<group>"; };
 		CE9B0AFE2836712B00C723F9 /* FavouriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteModel.swift; sourceTree = "<group>"; };
 		CE9B0B002836B36800C723F9 /* FavouritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePresenter.swift; sourceTree = "<group>"; };
@@ -90,6 +94,8 @@
 		CEE504822838163D006B4CEB /* ExercisePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePresenter.swift; sourceTree = "<group>"; };
 		CEE50485283829AF006B4CEB /* ExerciseDetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetModel.swift; sourceTree = "<group>"; };
 		CEE50487283829BF006B4CEB /* ExerciseDetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetPresenter.swift; sourceTree = "<group>"; };
+		CEE5048E2838F1FA006B4CEB /* DetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModel.swift; sourceTree = "<group>"; };
+		CEE504902838F211006B4CEB /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
 		CEE81B3E28147F2400E2238C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CEE81B832816B46700E2238C /* FirebaseStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStructs.swift; sourceTree = "<group>"; };
 		CEE81B852816BE8700E2238C /* SectionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionStruct.swift; sourceTree = "<group>"; };
@@ -188,7 +194,7 @@
 			children = (
 				CEE50484283824C4006B4CEB /* Exercise - RootScreen */,
 				CEE50489283829C6006B4CEB /* ExerciseDet - modal 0 */,
-				CE8B74AB2810033A002E32A3 /* DetailsViewController.swift */,
+				CEE504922838F26A006B4CEB /* Details - modal 1 */,
 				CE8B74A7280EE512002E32A3 /* UIViewTableViewCell.swift */,
 				CE8B74A8280EE512002E32A3 /* UIViewTableViewCell.xib */,
 			);
@@ -223,6 +229,17 @@
 				CEE50485283829AF006B4CEB /* ExerciseDetModel.swift */,
 			);
 			path = "ExerciseDet - modal 0";
+			sourceTree = "<group>";
+		};
+		CEE504922838F26A006B4CEB /* Details - modal 1 */ = {
+			isa = PBXGroup;
+			children = (
+				CE8B74AB2810033A002E32A3 /* DetailsViewController.swift */,
+				CEE504902838F211006B4CEB /* DetailsPresenter.swift */,
+				CEE5048E2838F1FA006B4CEB /* DetailsModel.swift */,
+				CE91F04828391FCA009CCF08 /* NotificationBannerView.swift */,
+			);
+			path = "Details - modal 1";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,6 +340,7 @@
 				CEE50486283829AF006B4CEB /* ExerciseDetModel.swift in Sources */,
 				CE902B66282D31130037E2AB /* CustomButton.swift in Sources */,
 				CE902B19282546520037E2AB /* FavouriteManager.swift in Sources */,
+				CEE5048F2838F1FA006B4CEB /* DetailsModel.swift in Sources */,
 				CE9B0AFF2836712B00C723F9 /* FavouriteModel.swift in Sources */,
 				CE8B74A9280EE512002E32A3 /* UIViewTableViewCell.swift in Sources */,
 				CEB33994280B431500476B97 /* NetworkManager.swift in Sources */,
@@ -339,6 +357,7 @@
 				CE902B64282C01600037E2AB /* InitialLoginViewController.swift in Sources */,
 				CE9B0AFD28365C3A00C723F9 /* TheoryModel.swift in Sources */,
 				CE902B68282E5F5D0037E2AB /* RegistrationViewController.swift in Sources */,
+				CEE504912838F211006B4CEB /* DetailsPresenter.swift in Sources */,
 				CE6DA43428061355003D1BFC /* SceneDelegate.swift in Sources */,
 				CEE504832838163E006B4CEB /* ExercisePresenter.swift in Sources */,
 				CE902B6028282F7E0037E2AB /* LoginViewController.swift in Sources */,
@@ -346,6 +365,7 @@
 				CE2D65A128076B240012A4D8 /* TheoryViewController.swift in Sources */,
 				CEE50488283829BF006B4CEB /* ExerciseDetPresenter.swift in Sources */,
 				CEE81B842816B46700E2238C /* FirebaseStructs.swift in Sources */,
+				CE91F04928391FCA009CCF08 /* NotificationBannerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

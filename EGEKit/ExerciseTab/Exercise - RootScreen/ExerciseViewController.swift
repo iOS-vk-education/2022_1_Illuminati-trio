@@ -29,17 +29,8 @@ final class ExerciseViewController: UIViewController {
                 
         view.backgroundColor = .systemBackground
         
-        titleOfScreen.text = "Каталог заданий"
-        titleOfScreen.font = .boldSystemFont(ofSize: 20)
-        
-        titleInfo.text = "Здесь представлен список задач, разделенный по типам"
-        titleInfo.textColor = .systemGray
-        titleInfo.numberOfLines = 2
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(.init(nibName: "UIViewTableViewCell", bundle: nil), forCellReuseIdentifier: "UIViewTableViewCell")
-        tableView.separatorStyle = .none
+        setupTable()
+        setupLabels()
         
         [tableView,titleOfScreen,titleInfo,activityIndicator].forEach{self.view.addSubview($0)}
         
@@ -63,6 +54,22 @@ final class ExerciseViewController: UIViewController {
             .left().right().marginHorizontal(10).height(60)
         
         tableView.pin.below(of: titleInfo).left().right().bottom()
+    }
+    
+    private func setupTable() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(.init(nibName: "UIViewTableViewCell", bundle: nil), forCellReuseIdentifier: "UIViewTableViewCell")
+        tableView.separatorStyle = .none
+    }
+    
+    private func setupLabels() {
+        titleOfScreen.text = "Каталог заданий"
+        titleOfScreen.font = .boldSystemFont(ofSize: 20)
+        
+        titleInfo.text = "Здесь представлен список задач, разделенный по типам"
+        titleInfo.textColor = .systemGray
+        titleInfo.numberOfLines = 2
     }
     
     func loadExerciseDetails(with title: String) {

@@ -11,13 +11,15 @@ import WebKit
 import PinLayout
 
 final class DetailsViewController: UIViewController {
+    private let presenter = DetailsPresenter()
+    let banner = NotificationBannerView(frame: .zero)
     
     private let number: String
     private var htmlUslovie: String = ""
     private var htmlSolution: String = ""
     private let solutionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50))
-    private let activityIndicator = UIActivityIndicatorView(style: .medium)
-    private lazy var isFav = FavouriteManager.shared.isFavourite(with: number)
+    private let activityIndicator = UIActivityIndicatorView(style: .large)
+    lazy var isFav = presenter.isFavourite(with: number)
     
     private let webViewUslovie: WKWebView = {
         return WKWebView(frame: .zero)
@@ -31,6 +33,7 @@ final class DetailsViewController: UIViewController {
     init(number: String) {
         self.number = number
         super.init(nibName: nil, bundle: nil)
+        self.title = "Задача № \(number)"
     }
     
     required init?(coder: NSCoder) {
@@ -40,20 +43,92 @@ final class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Задача № \(number)"
         view.backgroundColor = .systemBackground
         
         activityIndicator.startAnimating()
+        
+        setupWebViews()
+        setupButtons()
+        
+        view.addSubview(activityIndicator)
+        view.addSubview(banner)
+        
+        [webViewUslovie,webViewSolution,solutionButton].forEach{
+            self.view.addSubview($0)}
+        
+        let titleView = UILabel()
+        titleView.text = self.title
+        titleView.font = .boldSystemFont(ofSize: 20)
+        titleView.isUserInteractionEnabled = true
+        self.navigationItem.titleView = titleView
+        
+        banner.isHidden = true
+        
+        let tapToCopy = UILongPressGestureRecognizer(target: self, action: #selector(copyUrl))
+        titleView.addGestureRecognizer(tapToCopy)
+        
+        presenter.viewController = self
+        presenter.didLoadView(with: number)
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        webViewUslovie.pin
+            .top()
+            .left()
+            .right()
 
+        webViewSolution.pin
+            .below(of: solutionButton)
+            .left()
+            .right()
+            .bottom()
+        
+        activityIndicator.pin
+            .center()
+        
+        solutionButton.pin
+            .left(view.pin.safeArea.left + 5)
+        
+        banner.pin
+            .horizontally(36)
+            .height(48)
+            .bottom(view.safeAreaInsets.bottom)
+    }
+    @objc
+    private func copyUrl() {
+        let tapticFeedback = UINotificationFeedbackGenerator()
+        tapticFeedback.notificationOccurred(.success)
+        UIPasteboard.general.string = "https://math-ege.sdamgia.ru/problem?id=\(number)"
+        banner.isHidden = false
+        DispatchQueue.main.asyncAfter(wallDeadline: .now() + 3) {
+            self.banner.isHidden = true
+        }
+    }
+    
+    @objc
+    private func pressFavourite() {
+        presenter.favButtonPressed(with: number)
+    }
+    
+    @objc
+    private func goBack()
+    {
+        presenter.backButtonPressed()
+    }
+    
+    private func setupButtons() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(goBack))
-        
-        print(isFav)
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: createFavButton())
+                
+        reloadFavButton()
                 
         solutionButton.configuration = setupSolButton()
         solutionButton.applyShadow(cornerRadius: 5)
-        
+    }
+    
+    private func setupWebViews() {
         webViewSolution.isOpaque = false
         webViewSolution.backgroundColor = .clear
         webViewSolution.navigationDelegate = self
@@ -63,73 +138,29 @@ final class DetailsViewController: UIViewController {
         webViewUslovie.isOpaque = false
         webViewUslovie.backgroundColor = .clear
         webViewUslovie.navigationDelegate = self
-        
-        view.addSubview(activityIndicator)
-        
-        print(webViewUslovie.frame.height)
-
-        
-        [webViewUslovie,webViewSolution,solutionButton].forEach{
-            self.view.addSubview($0)}
-        
-//        webView.contentMode = .scaleAspectFit
-//        webView.pageZoom = 3
-        
-        loadInfo()
-        
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-//        solutionButton.pin.center().sizeToFit()
-//
-//        solutionButton.isHidden = false
-        
-        webViewUslovie.pin
-            .top()
-            .left()
-            .right()
-//            .above(of: solutionButton)
-        
-//        webViewUslovie.isHidden = false
-
-        
-        webViewSolution.pin
-            .below(of: solutionButton)
-            .left()
-            .right()
-            .bottom()
-        
-        activityIndicator.pin.center()
-        
-        setupShowSolutionLayout()
-        
-    }
-    
-    @objc
-    private func pressFavourite() {
-        if !isFav {
-        FavouriteManager.shared.markAsFavourite(with: self.number)
-        } else {
-            FavouriteManager.shared.deleteFromFavourite(with: self.number)
-        }
-        isFav = !isFav
+    func reloadFavButton() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: createFavButton())
     }
     
-    @objc
-    private func goBack()
-    {
-        let check = self.navigationController?.viewControllers.count ?? 0
-        if check == 2 {
-            self.navigationController?.popToRootViewController(animated: true)
-        } else {
-            self.navigationController?.dismiss(animated: true)
-        }
+    func loadWebViews() {
+        webViewUslovie.loadHTMLString(presenter.htmlUslovie, baseURL: .none)
+        webViewSolution.loadHTMLString(presenter.htmlSolution, baseURL: .none)
     }
     
-    func setupShowSolutionLayout() {
+    func stopActivityIndicator() {
+        activityIndicator.stopAnimating()
+    }
+    
+    func webViewDarkModeSupport() {
+        let cssSttring = ":root {color-scheme: light dark;}@media (prefers-color-scheme: dark) {img {filter: invert(100%)}}"
+        let jsString = "var style = document.createElement('style'); style.innerHTML = '\(cssSttring)'; document.head.appendChild(style);"
+        webViewUslovie.evaluateJavaScript(jsString, completionHandler: nil)
+        webViewSolution.evaluateJavaScript(jsString, completionHandler: nil)
+    }
+    
+    func setDynamicHeight() {
         webViewUslovie.evaluateJavaScript("document.documentElement.scrollHeight") { (height, error) in
             let height2 = height as? CGFloat ?? 200
             
@@ -138,14 +169,13 @@ final class DetailsViewController: UIViewController {
 
             self.solutionButton.pin
                 .below(of: self.webViewUslovie)
-                .left(self.view.pin.safeArea.left + 5)
                 .sizeToFit()
             
             self.solutionButton.isHidden = false
         }
     }
     
-    func createFavButton() -> UIButton {
+    private func createFavButton() -> UIButton {
         var systemImageName: String = ""
         let favButton = UIButton(type: .custom)
         let config = UIImage.SymbolConfiguration(pointSize: 20.0)
@@ -157,7 +187,7 @@ final class DetailsViewController: UIViewController {
         return favButton
     }
     
-    func setupSolButton() -> UIButton.Configuration {
+    private func setupSolButton() -> UIButton.Configuration {
         solutionButton.isHidden = true
         solutionButton.addTarget(self, action: #selector(hideUnhide),
                                  for: .touchUpInside)
@@ -165,19 +195,6 @@ final class DetailsViewController: UIViewController {
         config.title = "Показать решение"
         config.baseBackgroundColor = .systemIndigo
         return config
-    }
-    
-    func loadInfo() {
-        Task {
-            let result = await NetworkManager.shared.loadUslovieAndSolution(at: number)
-            let align = "<meta name=\"viewport\" content=\"width=device-width\">"
-            
-            htmlUslovie = align + result.0
-            htmlSolution = align + result.1
-            
-            webViewUslovie.loadHTMLString(htmlUslovie, baseURL: .none)
-            webViewSolution.loadHTMLString(htmlSolution, baseURL: .none)
-        }
     }
     
     @objc
@@ -195,13 +212,6 @@ final class DetailsViewController: UIViewController {
 extension DetailsViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        activityIndicator.stopAnimating()
-        
-        let cssSttring = ":root {color-scheme: light dark;}@media (prefers-color-scheme: dark) {img {filter: invert(100%)}}"
-        let jsString = "var style = document.createElement('style'); style.innerHTML = '\(cssSttring)'; document.head.appendChild(style);"
-        webView.evaluateJavaScript(jsString, completionHandler: nil)
-        
-        setupShowSolutionLayout()
-        
+        presenter.webViewFinishedLoading()
     }
 }

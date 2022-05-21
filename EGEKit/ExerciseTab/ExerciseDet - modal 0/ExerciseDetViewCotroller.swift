@@ -36,14 +36,8 @@ final class ExerciseDetViewController: UIViewController {
         self.title = title0
         
         [tableView,activityIndicator].forEach{self.view.addSubview($0)}
-
-        tableView.separatorStyle = .none
         
-        tableView.frame = view.bounds
-        tableView.register(.init(nibName: "UIViewTableViewCell", bundle: nil),
-                           forCellReuseIdentifier: "UIViewTableViewCell")
-        tableView.delegate = self
-        tableView.dataSource = self
+        setupTable()
         
         activityIndicator.startAnimating()
         activityIndicator.center = self.view.center
@@ -63,6 +57,15 @@ final class ExerciseDetViewController: UIViewController {
     private func goBack()
     {
         self.navigationController?.dismiss(animated: true)
+    }
+    
+    private func setupTable() {
+        tableView.separatorStyle = .none
+        tableView.frame = view.bounds
+        tableView.register(.init(nibName: "UIViewTableViewCell", bundle: nil),
+                           forCellReuseIdentifier: "UIViewTableViewCell")
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     func loadExercise(with number: String) {
