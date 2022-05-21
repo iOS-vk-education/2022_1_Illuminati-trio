@@ -58,7 +58,7 @@ final class DetailsViewController: UIViewController {
         
         let titleView = UILabel()
         titleView.text = self.title
-        titleView.font = .boldSystemFont(ofSize: 20)
+        titleView.font = .boldSystemFont(ofSize: 18)
         titleView.isUserInteractionEnabled = true
         self.navigationItem.titleView = titleView
         
@@ -82,6 +82,7 @@ final class DetailsViewController: UIViewController {
 
         webViewSolution.pin
             .below(of: solutionButton)
+            .marginTop(15)
             .left()
             .right()
             .bottom()
@@ -93,7 +94,7 @@ final class DetailsViewController: UIViewController {
             .left(view.pin.safeArea.left + 5)
         
         banner.pin
-            .horizontally(36)
+            .horizontally(10%)
             .height(48)
             .bottom(view.safeAreaInsets.bottom)
     }
@@ -168,6 +169,7 @@ final class DetailsViewController: UIViewController {
             self.webViewUslovie.isHidden = false
 
             self.solutionButton.pin
+                .marginTop(15)
                 .below(of: self.webViewUslovie)
                 .sizeToFit()
             

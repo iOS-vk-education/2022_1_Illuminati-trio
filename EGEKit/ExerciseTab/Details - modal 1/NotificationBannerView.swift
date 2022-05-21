@@ -36,6 +36,8 @@ final class NotificationBannerView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        label.pin.center().sizeToFit()
+        label.pin
+            .center()
+            .sizeToFit()
     }
 }
