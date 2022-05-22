@@ -1,4 +1,4 @@
-# 2022_5_Illuminati trio
+# 2022_1_Illuminati trio
 Проект команды №5 по курсу "Разработка приложений на iOS" VK Group (весна 2022)
 
 ![full1](https://user-images.githubusercontent.com/56135499/169701304-e7892e66-ebda-4ccf-a38e-e327ebe0eb08.png)
