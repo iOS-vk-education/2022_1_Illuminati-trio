@@ -13,12 +13,12 @@ EGEKit будет вашим незаменимым инструментом и 
 
 MVP
 
-PinLayout
-Firebase
-Firestore
-UserDefaults
-CoreAnimation
-HTMLKit
+PinLayout__
+Firebase__
+Firestore__
+UserDefaults__
+CoreAnimation__
+HTMLKit__
 Swift 5
 
 ## Команда 
