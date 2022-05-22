@@ -12,6 +12,7 @@ EGEKit будет вашим незаменимым инструментом и 
 ## Стек технологий
 
 MVP
+
 PinLayout
 Firebase
 Firestore
