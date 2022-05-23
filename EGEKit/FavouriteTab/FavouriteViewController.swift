@@ -8,8 +8,10 @@
 import Foundation
 import UIKit
 import PinLayout
+import WebKit
 
 class FavouriteViewController: UIViewController {
+    
     private let presenter = FavouritePresenter()
     private let titleOfScreen = UILabel()
     private let hCollectionTitle = UILabel()
@@ -25,9 +27,9 @@ class FavouriteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        byPassDdos()
         view.backgroundColor = .systemBackground
         
-        print(NetworkManager.userEmail)
         titleOfScreen.text = "Избранное"
         titleOfScreen.font = .boldSystemFont(ofSize: 20)
         
@@ -95,6 +97,17 @@ class FavouriteViewController: UIViewController {
         eraseFav.pin
             .above(of: exerciseTableView)
             .right().sizeToFit()
+    }
+    
+    func byPassDdos() {
+        let webViewDdos: WKWebView = {
+            return WKWebView(frame: .zero)
+        }()
+        view.addSubview(webViewDdos)
+        if let url = URL(string: "https://ege.sdamgia.ru/") {
+            let request = URLRequest(url: url)
+            webViewDdos.load(request)
+        }
     }
     
     func reloadRecents() {

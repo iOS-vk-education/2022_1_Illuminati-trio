@@ -12,13 +12,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = scene as? UIWindowScene else { return }
         
         let window = UIWindow(windowScene: windowScene)
         self.window = window
+        
+        if (!UserDefaults.standard.bool(forKey: "hasRunBefore")) {
+            
+            do {
+                try Auth.auth().signOut()
+            } catch {}
+            
+            UserDefaults.standard.set(true, forKey: "hasRunBefore")
+            UserDefaults.standard.synchronize()
+        }
         
         let isAuth: Bool = Auth.auth().currentUser != nil
         
@@ -32,9 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             navC.modalPresentationStyle = .fullScreen
             self.window?.rootViewController?.present(navC, animated: false)
         } else {
-            
-        NetworkManager.userEmail = (Auth.auth().currentUser?.email)!
-                        
+            NetworkManager.userEmail = (Auth.auth().currentUser?.email)!
         }
         
     }

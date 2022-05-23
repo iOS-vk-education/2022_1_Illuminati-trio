@@ -32,6 +32,10 @@ final class TheoryDetailsViewController: UIViewController {
         super.viewDidLoad()
         self.title = title0
         
+        view.backgroundColor = .systemBackground
+        
+        supportDarkTheme()
+        
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "chevron.left"),
             style: .plain,
@@ -44,6 +48,8 @@ final class TheoryDetailsViewController: UIViewController {
         activityIndicator.startAnimating()
         activityIndicator.center = self.view.center
         
+        webView.isOpaque = false
+        webView.backgroundColor = .clear
         webView.navigationDelegate = self
         
         guard let url = URL(string: urlString) else {return}
