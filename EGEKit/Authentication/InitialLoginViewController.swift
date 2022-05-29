@@ -8,16 +8,29 @@
 import Foundation
 import UIKit
 import PinLayout
+import RiveRuntime
 
 final class InitialLoginViewController: UIViewController {
     @IBOutlet weak var loginButton: CustomButton!
     
     @IBOutlet weak var reg: CustomButton!
     
+    lazy var riveModel = RiveViewModel(fileName: "new_file")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loginButton.tintColor = .secondarySystemGroupedBackground
+        
+        let riveView = riveModel.createRiveView()
+        view.insertSubview(riveView, at: 0)
+        
+        let blur = UIBlurEffect(style: .systemUltraThinMaterial)
+        let blurView = UIVisualEffectView(effect: blur)
+        blurView.frame = view.bounds
+        riveView.addSubview(blurView)
+        
+        riveView.frame = view.bounds
         
         supportDarkTheme()
         

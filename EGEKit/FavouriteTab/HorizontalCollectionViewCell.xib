@@ -11,50 +11,52 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HorizontalCollectionViewCell" id="gTV-IL-0wX" customClass="HorizontalCollectionViewCell" customModule="EGEKit" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="91" height="91"/>
+            <rect key="frame" x="0.0" y="0.0" width="75" height="90"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="91" height="91"/>
+                <rect key="frame" x="0.0" y="0.0" width="75" height="90"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jap-4u-YXz">
+                        <rect key="frame" x="21" y="74" width="33" height="16"/>
+                        <fontDescription key="fontDescription" type="italicSystem" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <size key="shadowOffset" width="-3" height="2"/>
+                    </label>
                     <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghj-0p-b23">
-                        <rect key="frame" x="20" y="16" width="51" height="55.5"/>
+                        <rect key="frame" x="8" y="11" width="59" height="59"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXS-NM-baC">
-                                <rect key="frame" x="5" y="17" width="40" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="f(x)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXS-NM-baC">
+                                <rect key="frame" x="19" y="20" width="24" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" systemColor="systemBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="ghj-0p-b23" secondAttribute="height" multiplier="1:1" id="36g-xP-ZRD"/>
+                            <constraint firstItem="RXS-NM-baC" firstAttribute="leading" secondItem="ghj-0p-b23" secondAttribute="leading" constant="17.5" id="ILl-cw-DMz"/>
+                            <constraint firstItem="RXS-NM-baC" firstAttribute="centerX" secondItem="ghj-0p-b23" secondAttribute="centerX" id="biL-l4-SoP"/>
+                            <constraint firstItem="RXS-NM-baC" firstAttribute="top" secondItem="ghj-0p-b23" secondAttribute="top" constant="20.5" id="cCQ-YN-gg9"/>
+                            <constraint firstItem="RXS-NM-baC" firstAttribute="centerY" secondItem="ghj-0p-b23" secondAttribute="centerY" id="jfL-UA-ZFM"/>
+                        </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                 <integer key="value" value="5"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jap-4u-YXz">
-                        <rect key="frame" x="29" y="74.5" width="33" height="16.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="Jap-4u-YXz" secondAttribute="height" multiplier="2:1" id="x5U-DP-ETi"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="ghj-0p-b23" secondAttribute="trailing" constant="20" id="Njs-T4-beC"/>
-                <constraint firstItem="Jap-4u-YXz" firstAttribute="top" secondItem="ghj-0p-b23" secondAttribute="bottom" constant="3" id="T4t-zv-boP"/>
-                <constraint firstItem="Jap-4u-YXz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="29" id="eJL-wu-MUK"/>
-                <constraint firstItem="ghj-0p-b23" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="pKt-tw-luh"/>
-                <constraint firstItem="ghj-0p-b23" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="16" id="pmB-PC-Aoj"/>
-                <constraint firstAttribute="trailing" secondItem="Jap-4u-YXz" secondAttribute="trailing" constant="29" id="saO-BO-vQ9"/>
-                <constraint firstAttribute="bottom" secondItem="Jap-4u-YXz" secondAttribute="bottom" id="y7U-iN-cOK"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ghj-0p-b23" secondAttribute="trailing" constant="7" id="The-aM-Z43"/>
+                <constraint firstAttribute="bottom" secondItem="ghj-0p-b23" secondAttribute="bottom" constant="20" id="jFw-mh-bgK"/>
+                <constraint firstItem="Jap-4u-YXz" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="lF0-m0-trk"/>
+                <constraint firstItem="ghj-0p-b23" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="mvf-98-0vP"/>
+                <constraint firstItem="ghj-0p-b23" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="7" id="t5N-ug-g53"/>
+                <constraint firstAttribute="bottom" secondItem="Jap-4u-YXz" secondAttribute="bottom" id="yXh-go-VkM"/>
             </constraints>
             <size key="customSize" width="91" height="91"/>
             <connections>
@@ -62,15 +64,12 @@
                 <outlet property="numberLabel" destination="Jap-4u-YXz" id="6g6-s4-47Y"/>
                 <outlet property="typeLabel" destination="RXS-NM-baC" id="1Il-tH-VBJ"/>
             </connections>
-            <point key="canvasLocation" x="167.39130434782609" y="80.022321428571431"/>
+            <point key="canvasLocation" x="44" y="-11"/>
         </collectionViewCell>
     </objects>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -16,6 +16,7 @@ class UIViewTableViewCell: UITableViewCell {
         self.containerView.layer.cornerRadius = 8
         self.containerView.layer.masksToBounds = true
         applyShadow(cornerRadius: 8)
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -56,7 +56,7 @@ final class TheoryViewController: UIViewController {
             .center()
         
         titleOfScreen.pin
-            .top(view.pin.safeArea.top)
+            .top(view.pin.safeArea.top + 10)
             .hCenter()
             .sizeToFit()
         
@@ -95,6 +95,7 @@ final class TheoryViewController: UIViewController {
 
 extension TheoryViewController: UITableViewDelegate, UITableViewDataSource {
     
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         60
     }
@@ -117,7 +118,6 @@ extension TheoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UIViewTableViewCell", for: indexPath)
-        
         let font = UIFont.systemFont(ofSize: self.fontSize, weight: .regular)
         
         cell.textLabel?.text = model.theoryNames[indexPath.row]
