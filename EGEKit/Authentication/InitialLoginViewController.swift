@@ -19,6 +19,8 @@ final class InitialLoginViewController: UIViewController {
         
         loginButton.tintColor = .secondarySystemGroupedBackground
         
+        supportDarkTheme()
+        
 //        createLayer()
     }
     
@@ -58,5 +60,14 @@ final class InitialLoginViewController: UIViewController {
         
         view.layer.insertSublayer(layer, at: 0)
         
+    }
+}
+
+extension UIViewController {
+    func supportDarkTheme() {
+        if let presentingVC = presentingViewController {
+            self.overrideUserInterfaceStyle = presentingVC.overrideUserInterfaceStyle
+            navigationController?.navigationBar.overrideUserInterfaceStyle = self.overrideUserInterfaceStyle
+        }
     }
 }

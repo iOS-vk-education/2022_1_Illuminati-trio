@@ -43,8 +43,16 @@ final class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let titleView = UILabel()
+        titleView.text = self.title
+        titleView.font = .boldSystemFont(ofSize: 18)
+        titleView.isUserInteractionEnabled = true
+        self.navigationItem.titleView = titleView
+        
         view.backgroundColor = .systemBackground
         
+        supportDarkTheme()
+                
         activityIndicator.startAnimating()
         
         setupWebViews()
@@ -55,12 +63,6 @@ final class DetailsViewController: UIViewController {
         
         [webViewUslovie,webViewSolution,solutionButton].forEach{
             self.view.addSubview($0)}
-        
-        let titleView = UILabel()
-        titleView.text = self.title
-        titleView.font = .boldSystemFont(ofSize: 18)
-        titleView.isUserInteractionEnabled = true
-        self.navigationItem.titleView = titleView
         
         banner.isHidden = true
         

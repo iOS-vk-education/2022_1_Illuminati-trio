@@ -38,7 +38,6 @@
 		CE902B352827021E0037E2AB /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = CE902B342827021E0037E2AB /* FirebaseStorage */; };
 		CE902B372827021E0037E2AB /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = CE902B362827021E0037E2AB /* FirebaseStorageCombine-Community */; };
 		CE902B6028282F7E0037E2AB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE902B5F28282F7E0037E2AB /* LoginViewController.swift */; };
-		CE902B62282BC3BC0037E2AB /* 2022-05-11 13.12.28.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE902B61282BC3BB0037E2AB /* 2022-05-11 13.12.28.jpg */; };
 		CE902B64282C01600037E2AB /* InitialLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE902B63282C01600037E2AB /* InitialLoginViewController.swift */; };
 		CE902B66282D31130037E2AB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE902B65282D31130037E2AB /* CustomButton.swift */; };
 		CE902B68282E5F5D0037E2AB /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE902B67282E5F5B0037E2AB /* RegistrationViewController.swift */; };
@@ -80,7 +79,6 @@
 		CE902B142824535A0037E2AB /* HorizontalCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalCollectionViewCell.xib; sourceTree = "<group>"; };
 		CE902B18282546520037E2AB /* FavouriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteManager.swift; sourceTree = "<group>"; };
 		CE902B5F28282F7E0037E2AB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		CE902B61282BC3BB0037E2AB /* 2022-05-11 13.12.28.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "2022-05-11 13.12.28.jpg"; sourceTree = "<group>"; };
 		CE902B63282C01600037E2AB /* InitialLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialLoginViewController.swift; sourceTree = "<group>"; };
 		CE902B65282D31130037E2AB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		CE902B67282E5F5B0037E2AB /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -146,7 +144,6 @@
 			children = (
 				CE6DA43128061355003D1BFC /* AppDelegate.swift */,
 				CE6DA43328061355003D1BFC /* SceneDelegate.swift */,
-				CE902B61282BC3BB0037E2AB /* 2022-05-11 13.12.28.jpg */,
 				CE6DA43728061355003D1BFC /* Main.storyboard */,
 				CE6DA43A28061357003D1BFC /* Assets.xcassets */,
 				CE6DA43C28061357003D1BFC /* LaunchScreen.storyboard */,
@@ -324,7 +321,6 @@
 				CE902B162824535B0037E2AB /* HorizontalCollectionViewCell.xib in Resources */,
 				CEE81B3F28147F2400E2238C /* GoogleService-Info.plist in Resources */,
 				CE6DA43B28061357003D1BFC /* Assets.xcassets in Resources */,
-				CE902B62282BC3BC0037E2AB /* 2022-05-11 13.12.28.jpg in Resources */,
 				CE6DA43928061355003D1BFC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,17 +11,43 @@ import FirebaseAuth
 import PinLayout
 
 class SettingsViewController: UIViewController {
+    weak var tabController: TabBarController?
     
     private let logOutButton = UIButton()
+    private let styleButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Настройки"
+                
         logOutButton.configuration = setupButton()
         logOutButton.addTarget(self, action: #selector(handleLogOut), for: .touchUpInside)
         
         view.backgroundColor = .systemBackground
         view.addSubview(logOutButton)
+        view.addSubview(styleButton)
+        
+        let themeMenu = UIMenu(title: "Тема оформления", children: [
+            UIAction(title: "Светлая"){_ in
+                self.tabController?.overrideUserInterfaceStyle = .light
+                UserDefaults.standard.set(self.tabController?.overrideUserInterfaceStyle.rawValue, forKey: "Theme")
+
+            },
+            UIAction(title: "Темная"){_ in
+                self.tabController?.overrideUserInterfaceStyle = .dark
+                UserDefaults.standard.set(self.tabController?.overrideUserInterfaceStyle.rawValue, forKey: "Theme")
+            },
+            UIAction(title: "Как в системе"){_ in
+                self.tabController?.overrideUserInterfaceStyle = .unspecified
+                UserDefaults.standard.set(self.tabController?.overrideUserInterfaceStyle.rawValue, forKey: "Theme")
+            }
+        ])
+        
+        let themeButton = UIBarButtonItem(image: UIImage(systemName: "moon.circle.fill"), menu: themeMenu)
+        navigationItem.rightBarButtonItem = themeButton
+        
+        
     }
     
     override func viewDidLayoutSubviews() {

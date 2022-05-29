@@ -35,6 +35,8 @@ final class ExerciseDetViewController: UIViewController {
         super.viewDidLoad()
         self.title = title0
         
+        supportDarkTheme()
+        
         [tableView,activityIndicator].forEach{self.view.addSubview($0)}
         
         setupTable()

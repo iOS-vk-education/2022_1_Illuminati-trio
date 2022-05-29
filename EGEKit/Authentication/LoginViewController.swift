@@ -32,6 +32,8 @@ class LoginViewController: UIViewController {
         loginButton.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
+        
+        supportDarkTheme()
 
     }
     

@@ -31,6 +31,8 @@ class RegistrationViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
         
+        supportDarkTheme()
+        
     }
     
     @objc

@@ -9,18 +9,24 @@ import Foundation
 import UIKit
 
 final class TabBarController: UITabBarController {
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBar.tintColor = .systemIndigo
         
-//        let viewC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginV")
-//        
-//        self.window?.rootViewController?.present(viewC, animated: false)
+        let currentTheme = UserDefaults.standard.integer(forKey: "Theme")
+
+        let currentStyle: UIUserInterfaceStyle = UIUserInterfaceStyle(rawValue: currentTheme) ?? .unspecified
+
+        overrideUserInterfaceStyle = currentStyle
         
         let favouriteVC = FavouriteViewController()
         let exerciseVC = ExerciseViewController()
         let theoryVC = TheoryViewController()
-        let settingsVC = SettingsViewController()
+        let settingsVC0 = SettingsViewController()
+        let settingsVC = UINavigationController(rootViewController: settingsVC0)
+        
+        settingsVC0.tabController = self
         
         favouriteVC.title = "Избранное"
         exerciseVC.title = "Задачи"
