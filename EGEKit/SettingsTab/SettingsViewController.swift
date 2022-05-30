@@ -162,18 +162,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
         if indexPath.section == 2 {
-            
-//            guard MFMailComposeViewController.canSendMail() else {
-//                return
-//            }
-//            let composer = MFMailComposeViewController()
-//            composer.overrideUserInterfaceStyle = tabController!.overrideUserInterfaceStyle
-//            composer.mailComposeDelegate = self
-//            composer.setToRecipients(["kosov11@gmail.com"])
-//            composer.setSubject("EGEKit")
-//            composer.setMessageBody("Здравствуйте, я бы хотел узнать", isHTML: false)
-//            present(composer, animated: true)
-            
             navigationController?.pushViewController(aboutViewControler(), animated: true)
         }
     }

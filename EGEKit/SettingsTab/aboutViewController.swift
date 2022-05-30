@@ -68,7 +68,7 @@ final class aboutViewControler: UIViewController {
         
         aboutLabel.pin
             .below(of: logoLabel)
-            .left(view.pin.safeArea.left + 15)
+            .left(view.pin.safeArea.left + 20)
             .right(view.pin.safeArea.right + 5)
             .height(70)
         
