@@ -35,7 +35,7 @@ class SettingsModel {
         ]))
         
         Sections.append(SectionTitle(title: "Дополнительно", options: [
-            SectionOption(name: "Обратная связь", handler: {})
+            SectionOption(name: "О приложении", handler: {})
         ]))
         
     }

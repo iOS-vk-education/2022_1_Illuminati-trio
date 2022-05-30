@@ -42,6 +42,15 @@ final class ExerciseViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        let backgroundImageView = UIImageView(frame: view.bounds)
+        backgroundImageView.image = UIImage(named: "spline3")
+        let blur = UIBlurEffect(style: .systemChromeMaterial)
+        let blurView = UIVisualEffectView(effect: blur)
+        blurView.frame = backgroundImageView.bounds
+        backgroundImageView.addSubview(blurView)
+        
+        tableView.backgroundView = backgroundImageView
+        
         activityIndicator.pin
             .center()
         

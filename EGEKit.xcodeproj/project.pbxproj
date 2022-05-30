@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CE1A16822843F722005BE6D0 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = CE1A16812843F722005BE6D0 /* RiveRuntime */; };
 		CE1A1686284401BA005BE6D0 /* new_file.riv in Resources */ = {isa = PBXBuildFile; fileRef = CE1A1685284401BA005BE6D0 /* new_file.riv */; };
+		CE1A16882844D961005BE6D0 /* aboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1A16872844D961005BE6D0 /* aboutViewController.swift */; };
 		CE2D6597280767C30012A4D8 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D6596280767C30012A4D8 /* TabBarController.swift */; };
 		CE2D6599280768690012A4D8 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D6598280768690012A4D8 /* FavouriteViewController.swift */; };
 		CE2D659D280769030012A4D8 /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D659C280769030012A4D8 /* ExerciseViewController.swift */; };
@@ -63,6 +64,7 @@
 
 /* Begin PBXFileReference section */
 		CE1A1685284401BA005BE6D0 /* new_file.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = new_file.riv; sourceTree = "<group>"; };
+		CE1A16872844D961005BE6D0 /* aboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aboutViewController.swift; sourceTree = "<group>"; };
 		CE2D6596280767C30012A4D8 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		CE2D6598280768690012A4D8 /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
 		CE2D659C280769030012A4D8 /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			children = (
 				CE2D659E280769800012A4D8 /* SettingsViewController.swift */,
 				CE909C06283FDC82004335C8 /* SettingsModel.swift */,
+				CE1A16872844D961005BE6D0 /* aboutViewController.swift */,
 			);
 			path = SettingsTab;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				CE2D659F280769800012A4D8 /* SettingsViewController.swift in Sources */,
 				CE902B152824535B0037E2AB /* HorizontalCollectionViewCell.swift in Sources */,
 				CE6DA43228061355003D1BFC /* AppDelegate.swift in Sources */,
+				CE1A16882844D961005BE6D0 /* aboutViewController.swift in Sources */,
 				CE909C07283FDC83004335C8 /* SettingsModel.swift in Sources */,
 				CE8B74A1280ED718002E32A3 /* ExerciseDetViewCotroller.swift in Sources */,
 				CE2D6599280768690012A4D8 /* FavouriteViewController.swift in Sources */,

@@ -29,7 +29,6 @@ final class InitialLoginViewController: UIViewController {
         let blurView = UIVisualEffectView(effect: blur)
         blurView.frame = view.bounds
         riveView.addSubview(blurView)
-        
         riveView.frame = view.bounds
         
         supportDarkTheme()
@@ -40,6 +39,16 @@ final class InitialLoginViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        AppUtility.lockOrientation(.portrait)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        AppUtility.lockOrientation(.all)
     }
     
     

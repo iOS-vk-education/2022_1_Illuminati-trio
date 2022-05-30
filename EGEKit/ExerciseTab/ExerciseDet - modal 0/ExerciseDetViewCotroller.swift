@@ -50,6 +50,21 @@ final class ExerciseDetViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(goBack))
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
+
+        let backgroundImageView = UIImageView(frame: view.bounds)
+        backgroundImageView.image = UIImage(named: "zigzag3")
+        let blur = UIBlurEffect(style: .systemUltraThinMaterial)
+        let blurView = UIVisualEffectView(effect: blur)
+        blurView.frame = backgroundImageView.bounds
+        backgroundImageView.addSubview(blurView)
+        
+        tableView.backgroundView = backgroundImageView
+        
+    }
+    
     @objc
     private func didUpdateTable() {
         tableView.reloadData()
@@ -63,7 +78,6 @@ final class ExerciseDetViewController: UIViewController {
     
     private func setupTable() {
         tableView.separatorStyle = .none
-        tableView.frame = view.bounds
         tableView.register(.init(nibName: "UIViewTableViewCell", bundle: nil),
                            forCellReuseIdentifier: "UIViewTableViewCell")
         tableView.delegate = self

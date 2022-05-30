@@ -52,6 +52,15 @@ final class TheoryViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        let backgroundImageView = UIImageView(frame: view.bounds)
+        backgroundImageView.image = UIImage(named: "theory")
+        let blur = UIBlurEffect(style: .systemUltraThinMaterial)
+        let blurView = UIVisualEffectView(effect: blur)
+        blurView.frame = backgroundImageView.bounds
+        backgroundImageView.addSubview(blurView)
+        
+        tableView.backgroundView = backgroundImageView
+        
         activityIndicator.pin
             .center()
         

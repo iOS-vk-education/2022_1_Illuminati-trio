@@ -35,6 +35,16 @@ class RegistrationViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        AppUtility.lockOrientation(.portrait)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        AppUtility.lockOrientation(.all)
+    }
+    
     @objc
     private func makeLogin() {
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] _, error in
