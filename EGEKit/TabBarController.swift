@@ -12,7 +12,6 @@ final class TabBarController: UITabBarController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBar.tintColor = .systemIndigo
         
         let currentTheme = UserDefaults.standard.integer(forKey: "Theme")
 

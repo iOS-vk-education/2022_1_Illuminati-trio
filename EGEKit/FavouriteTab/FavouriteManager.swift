@@ -15,6 +15,7 @@ protocol FavouriteManagerDescription {
     func deleteFromFavourite(with number: String)
     func isFavourite(with number: String) -> Bool
     func eraseFavourites()
+    func eraseRecents()
 }
 
 final class FavouriteManager: FavouriteManagerDescription {
@@ -26,7 +27,7 @@ final class FavouriteManager: FavouriteManagerDescription {
     static let favouritesNotificationKey = NSNotification.Name("IlumintatiTrio.EGEKit.Favourite.notifyFav")
     static let recentsNotificationKey = NSNotification.Name("IlumintatiTrio.EGEKit.Favourite.notifyRecents")
     
-    static let shared = FavouriteManager()
+    static let shared: FavouriteManagerDescription = FavouriteManager()
     
     let db = NetworkManager.shared.db
 
@@ -44,12 +45,21 @@ final class FavouriteManager: FavouriteManagerDescription {
         }
     }
     
+    func eraseRecents() {
+        model.lastSeen.removeAll()
+        
+        NotificationCenter.default.post(name: Self.recentsNotificationKey, object: nil)
+
+    }
+    
     func addLastSeen(with number: String) {
                 
         var lastSeen = model.lastSeen
         
-        if lastSeen.count == 10 {
-            lastSeen.remove(at: 9)
+        let fixedSize: Int = 15
+        
+        if lastSeen.count == fixedSize {
+            lastSeen.remove(at: fixedSize - 1)
         }
         
         if lastSeen.contains(number) {

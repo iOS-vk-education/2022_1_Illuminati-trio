@@ -42,11 +42,20 @@ final class ExerciseViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        let backgroundImageView = UIImageView(frame: view.bounds)
+        backgroundImageView.image = UIImage(named: "spline3")
+        let blur = UIBlurEffect(style: .systemChromeMaterial)
+        let blurView = UIVisualEffectView(effect: blur)
+        blurView.frame = backgroundImageView.bounds
+        backgroundImageView.addSubview(blurView)
+        
+        tableView.backgroundView = backgroundImageView
+        
         activityIndicator.pin
             .center()
         
         titleOfScreen.pin
-            .top(view.pin.safeArea.top)
+            .top(view.pin.safeArea.top + 10)
             .hCenter()
             .sizeToFit()
         
@@ -126,8 +135,6 @@ extension ExerciseViewController: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.row == 0 {
             let font = UIFont.systemFont(ofSize: 16, weight: .bold)
-            cell.containerView.layer.borderColor = UIColor.systemGray4.cgColor
-            cell.containerView.layer.borderWidth = 0.5
             cell.textLabel?.font = font
         }
         else {

@@ -16,6 +16,16 @@ class FavouriteViewController: UIViewController {
     private let titleOfScreen = UILabel()
     private let hCollectionTitle = UILabel()
     
+    lazy var cellsToDisplay: CGFloat = {
+        let cells: CGFloat
+        if UIDevice.current.orientation.isPortrait == true {
+            cells = 5
+        } else {
+            cells = 9
+        }
+        return cells
+    }()
+
     private let hCollectionView: UICollectionView = {
         let collectionLayout = UICollectionViewFlowLayout()
         collectionLayout.scrollDirection = .horizontal
@@ -27,6 +37,7 @@ class FavouriteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
         byPassDdos()
         view.backgroundColor = .systemBackground
         
@@ -47,7 +58,6 @@ class FavouriteViewController: UIViewController {
     
         hCollectionView.delegate = self
         hCollectionView.dataSource = self
-//        hCollectionView.register(HorizontalCollectionViewCell1.self, forCellWithReuseIdentifier: "HorizontalCollectionViewCell1")
         hCollectionView.register(.init(nibName: "HorizontalCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HorizontalCollectionViewCell")
 
         exerciseTableView.separatorStyle = .none
@@ -64,39 +74,59 @@ class FavouriteViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        
+        let backgroundImageView = UIImageView(frame: view.bounds)
+        backgroundImageView.image = UIImage(named: "sweet4")
+        let blur = UIBlurEffect(style: .systemChromeMaterial)
+        let blurView = UIVisualEffectView(effect: blur)
+        blurView.frame = backgroundImageView.bounds
+        backgroundImageView.addSubview(blurView)
+        
+        exerciseTableView.backgroundView = backgroundImageView
+        
         titleOfScreen.pin
-            .top(view.pin.safeArea.top)
+            .top(view.pin.safeArea.top + 10)
             .hCenter()
             .sizeToFit()
         
         hCollectionTitle.pin
             .below(of: titleOfScreen)
-            .margin(8)
-            .left()
+            .marginTop(8)
+            .left(view.pin.safeArea.left + 8)
             .sizeToFit()
         
         hCollectionView.pin
             .below(of: hCollectionTitle)
-            .marginTop(5)
-            .left()
-            .right()
-            .height(15%)
+            .left(view.pin.safeArea.left)
+            .right(view.pin.safeArea.right)
+            .height(120)
         
         exerciseTableView.pin
             .below(of: hCollectionView)
-            .marginTop(50)
-            .left()
-            .right()
+            .marginTop(30)
+            .left(view.pin.safeArea.left)
+            .right(view.pin.safeArea.right)
             .bottom(view.pin.safeArea.bottom)
         
         tableViewLabel.pin
             .above(of: exerciseTableView)
-            .margin(8)
-            .left().sizeToFit()
+            .marginBottom(8)
+            .left(view.pin.safeArea.left + 8)
+            .sizeToFit()
         
         eraseFav.pin
             .above(of: exerciseTableView)
-            .right().sizeToFit()
+            .right(view.pin.safeArea.right + 8)
+            .sizeToFit()
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isPortrait == true {
+            cellsToDisplay = 5
+        } else {
+            cellsToDisplay = 9
+        }
+        hCollectionView.reloadData()
     }
     
     func byPassDdos() {
@@ -133,6 +163,7 @@ class FavouriteViewController: UIViewController {
 extension FavouriteViewController: UICollectionViewDelegate, UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout {
     
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return presenter.lastSeen.count
     }
@@ -142,27 +173,24 @@ UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let avaliableWidth = collectionView.frame.width - 3
-        let cellSizeLength = avaliableWidth / 4
+        let avaliableWidth = collectionView.frame.width - (cellsToDisplay - 1)
+        let cellSizeLength = avaliableWidth / cellsToDisplay
         
-        return CGSize(width: cellSizeLength, height: cellSizeLength)
+        return CGSize(width: floor(cellSizeLength), height: floor(cellSizeLength))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         1
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         1
     }
-    
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: "HorizontalCollectionViewCell", for: indexPath) as? HorizontalCollectionViewCell else { return .init() }
         
-        cell.typeLabel.text = "Задача"
         cell.numberLabel.text = presenter.lastSeen[indexPath.row]
         
         return cell
@@ -192,39 +220,7 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         presenter.didSelectFavRow(at: indexPath.row)
     }
-
 }
-
-
-
-//class HorizontalCollectionViewCell1: UICollectionViewCell {
-//
-//    private var cellLabel = UILabel()
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-////        backgroundColor = .systemIndigo
-//        let grayView: UIView = .init(frame: frame)
-//        grayView.backgroundColor = .red
-//        cellLabel.text = "Test"
-//        cellLabel.textColor = .white
-//        self.addSubview(grayView)
-//        self.addSubview(cellLabel)
-//    }
-//
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        cellLabel.pin
-//            .bottomCenter()
-//            .sizeToFit()
-//
-////        grayView.pin.center()
-//    }
-//
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//}
 
 
         

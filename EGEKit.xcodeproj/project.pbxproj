@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE1A16822843F722005BE6D0 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = CE1A16812843F722005BE6D0 /* RiveRuntime */; };
+		CE1A1686284401BA005BE6D0 /* new_file.riv in Resources */ = {isa = PBXBuildFile; fileRef = CE1A1685284401BA005BE6D0 /* new_file.riv */; };
+		CE1A16882844D961005BE6D0 /* aboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1A16872844D961005BE6D0 /* aboutViewController.swift */; };
 		CE2D6597280767C30012A4D8 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D6596280767C30012A4D8 /* TabBarController.swift */; };
 		CE2D6599280768690012A4D8 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D6598280768690012A4D8 /* FavouriteViewController.swift */; };
 		CE2D659D280769030012A4D8 /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D659C280769030012A4D8 /* ExerciseViewController.swift */; };
@@ -41,6 +44,7 @@
 		CE902B64282C01600037E2AB /* InitialLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE902B63282C01600037E2AB /* InitialLoginViewController.swift */; };
 		CE902B66282D31130037E2AB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE902B65282D31130037E2AB /* CustomButton.swift */; };
 		CE902B68282E5F5D0037E2AB /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE902B67282E5F5B0037E2AB /* RegistrationViewController.swift */; };
+		CE909C07283FDC83004335C8 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE909C06283FDC82004335C8 /* SettingsModel.swift */; };
 		CE91F04928391FCA009CCF08 /* NotificationBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91F04828391FCA009CCF08 /* NotificationBannerView.swift */; };
 		CE9B0AFD28365C3A00C723F9 /* TheoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0AFC28365C3900C723F9 /* TheoryModel.swift */; };
 		CE9B0AFF2836712B00C723F9 /* FavouriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0AFE2836712B00C723F9 /* FavouriteModel.swift */; };
@@ -59,6 +63,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE1A1685284401BA005BE6D0 /* new_file.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = new_file.riv; sourceTree = "<group>"; };
+		CE1A16872844D961005BE6D0 /* aboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aboutViewController.swift; sourceTree = "<group>"; };
 		CE2D6596280767C30012A4D8 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		CE2D6598280768690012A4D8 /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
 		CE2D659C280769030012A4D8 /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +88,7 @@
 		CE902B63282C01600037E2AB /* InitialLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialLoginViewController.swift; sourceTree = "<group>"; };
 		CE902B65282D31130037E2AB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		CE902B67282E5F5B0037E2AB /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		CE909C06283FDC82004335C8 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		CE91F04828391FCA009CCF08 /* NotificationBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationBannerView.swift; sourceTree = "<group>"; };
 		CE9B0AFC28365C3900C723F9 /* TheoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheoryModel.swift; sourceTree = "<group>"; };
 		CE9B0AFE2836712B00C723F9 /* FavouriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteModel.swift; sourceTree = "<group>"; };
@@ -113,6 +120,7 @@
 				CE902B352827021E0037E2AB /* FirebaseStorage in Frameworks */,
 				CE902B212827021E0037E2AB /* FirebaseAuth in Frameworks */,
 				CE902B292827021E0037E2AB /* FirebaseDynamicLinks in Frameworks */,
+				CE1A16822843F722005BE6D0 /* RiveRuntime in Frameworks */,
 				CE902B312827021E0037E2AB /* FirebaseFunctions in Frameworks */,
 				CE902B2B2827021E0037E2AB /* FirebaseFirestore in Frameworks */,
 				CE902B332827021E0037E2AB /* FirebaseFunctionsCombine-Community in Frameworks */,
@@ -153,7 +161,7 @@
 				CE902B17282453670037E2AB /* FavouriteTab */,
 				CEAB0B70282322B9000F0FC4 /* ExerciseTab */,
 				CEAB0B71282322EE000F0FC4 /* TheoryTab */,
-				CE2D659E280769800012A4D8 /* SettingsViewController.swift */,
+				CE909C08283FEF00004335C8 /* SettingsTab */,
 				CEB33993280B431500476B97 /* NetworkManager.swift */,
 				CEE81B832816B46700E2238C /* FirebaseStructs.swift */,
 				CEE81B852816BE8700E2238C /* SectionStruct.swift */,
@@ -175,9 +183,20 @@
 			path = FavouriteTab;
 			sourceTree = "<group>";
 		};
+		CE909C08283FEF00004335C8 /* SettingsTab */ = {
+			isa = PBXGroup;
+			children = (
+				CE2D659E280769800012A4D8 /* SettingsViewController.swift */,
+				CE909C06283FDC82004335C8 /* SettingsModel.swift */,
+				CE1A16872844D961005BE6D0 /* aboutViewController.swift */,
+			);
+			path = SettingsTab;
+			sourceTree = "<group>";
+		};
 		CE9B0AFB2833F54B00C723F9 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				CE1A1685284401BA005BE6D0 /* new_file.riv */,
 				CE902B63282C01600037E2AB /* InitialLoginViewController.swift */,
 				CE902B5F28282F7E0037E2AB /* LoginViewController.swift */,
 				CE902B67282E5F5B0037E2AB /* RegistrationViewController.swift */,
@@ -269,6 +288,7 @@
 				CE902B322827021E0037E2AB /* FirebaseFunctionsCombine-Community */,
 				CE902B342827021E0037E2AB /* FirebaseStorage */,
 				CE902B362827021E0037E2AB /* FirebaseStorageCombine-Community */,
+				CE1A16812843F722005BE6D0 /* RiveRuntime */,
 			);
 			productName = EGEKit;
 			productReference = CE6DA42E28061355003D1BFC /* EGEKit.app */;
@@ -301,6 +321,7 @@
 			packageReferences = (
 				CE2D65A22807794E0012A4D8 /* XCRemoteSwiftPackageReference "PinLayout" */,
 				CE902B1F2827021E0037E2AB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				CE1A16802843F722005BE6D0 /* XCRemoteSwiftPackageReference "rive-ios" */,
 			);
 			productRefGroup = CE6DA42F28061355003D1BFC /* Products */;
 			projectDirPath = "";
@@ -319,6 +340,7 @@
 				CE8B74AA280EE512002E32A3 /* UIViewTableViewCell.xib in Resources */,
 				CE6DA43E28061357003D1BFC /* LaunchScreen.storyboard in Resources */,
 				CE902B162824535B0037E2AB /* HorizontalCollectionViewCell.xib in Resources */,
+				CE1A1686284401BA005BE6D0 /* new_file.riv in Resources */,
 				CEE81B3F28147F2400E2238C /* GoogleService-Info.plist in Resources */,
 				CE6DA43B28061357003D1BFC /* Assets.xcassets in Resources */,
 				CE6DA43928061355003D1BFC /* Main.storyboard in Resources */,
@@ -346,6 +368,8 @@
 				CE2D659F280769800012A4D8 /* SettingsViewController.swift in Sources */,
 				CE902B152824535B0037E2AB /* HorizontalCollectionViewCell.swift in Sources */,
 				CE6DA43228061355003D1BFC /* AppDelegate.swift in Sources */,
+				CE1A16882844D961005BE6D0 /* aboutViewController.swift in Sources */,
+				CE909C07283FDC83004335C8 /* SettingsModel.swift in Sources */,
 				CE8B74A1280ED718002E32A3 /* ExerciseDetViewCotroller.swift in Sources */,
 				CE2D6599280768690012A4D8 /* FavouriteViewController.swift in Sources */,
 				CE2D659D280769030012A4D8 /* ExerciseViewController.swift in Sources */,
@@ -506,6 +530,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PS289ZBK4N;
@@ -534,6 +559,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PS289ZBK4N;
@@ -581,6 +607,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CE1A16802843F722005BE6D0 /* XCRemoteSwiftPackageReference "rive-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rive-app/rive-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		CE2D65A22807794E0012A4D8 /* XCRemoteSwiftPackageReference "PinLayout" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/layoutBox/PinLayout";
@@ -600,6 +634,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CE1A16812843F722005BE6D0 /* RiveRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE1A16802843F722005BE6D0 /* XCRemoteSwiftPackageReference "rive-ios" */;
+			productName = RiveRuntime;
+		};
 		CE2D65A32807794E0012A4D8 /* PinLayout */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CE2D65A22807794E0012A4D8 /* XCRemoteSwiftPackageReference "PinLayout" */;

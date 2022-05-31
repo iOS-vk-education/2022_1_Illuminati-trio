@@ -30,20 +30,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         let isAuth: Bool = Auth.auth().currentUser != nil
-        
+                
         window.rootViewController = TabBarController()
+        window.isHidden = true
         window.makeKeyAndVisible()
-        
+                
         if !isAuth {
             let loginViewController: UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InitialLoginViewController")
-            
             let navC = UINavigationController(rootViewController: loginViewController)
             navC.modalPresentationStyle = .fullScreen
             self.window?.rootViewController?.present(navC, animated: false)
         } else {
             NetworkManager.userEmail = (Auth.auth().currentUser?.email)!
         }
-        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
