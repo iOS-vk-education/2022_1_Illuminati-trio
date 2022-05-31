@@ -87,7 +87,7 @@ final class FavouriteManager: FavouriteManagerDescription {
         NotificationCenter.default.post(name: Self.favouritesNotificationKey, object: nil)
         
         DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.db!.collection("users").document(NetworkManager.userEmail).setData(["fav": self?.model.favouriteNumber])
+            self?.db!.collection("users").document(NetworkManager.userEmail).updateData(["fav": self?.model.favouriteNumber])
         }
         
     }
@@ -98,9 +98,9 @@ final class FavouriteManager: FavouriteManagerDescription {
         }
                 
         NotificationCenter.default.post(name: Self.favouritesNotificationKey, object: nil)
-        
-        db!.collection("users").document(NetworkManager.userEmail).setData(["fav": model.favouriteNumber])
-
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.db!.collection("users").document(NetworkManager.userEmail).updateData(["fav": self?.model.favouriteNumber])
+        }
     }
     
     func eraseFavourites() {

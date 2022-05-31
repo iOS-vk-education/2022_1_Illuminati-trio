@@ -18,7 +18,7 @@ final class DetailsViewController: UIViewController {
     private let number: String
     private var htmlUslovie: String = ""
     private var htmlSolution: String = ""
-    private let solutionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50))
+    private let solutionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 260, height: 50))
     private let hideButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
     private let activityIndicator = UIActivityIndicatorView(style: .large)
     lazy var isFav = presenter.isFavourite(with: number)
@@ -100,7 +100,7 @@ final class DetailsViewController: UIViewController {
         banner.pin
             .horizontally(10%)
             .height(48)
-            .bottom(view.safeAreaInsets.bottom)
+            .bottom(view.safeAreaInsets.bottom + 25)
     }
     @objc
     private func copyUrl() {
