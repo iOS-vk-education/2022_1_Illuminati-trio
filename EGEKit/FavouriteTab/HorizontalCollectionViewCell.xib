@@ -27,17 +27,18 @@
                     <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghj-0p-b23">
                         <rect key="frame" x="8" y="5.5" width="59" height="59"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="f(x)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXS-NM-baC">
-                                <rect key="frame" x="19" y="20" width="24" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="f(x)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXS-NM-baC">
+                                <rect key="frame" x="17.5" y="20.5" width="24" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" systemColor="systemBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="ghj-0p-b23" secondAttribute="height" multiplier="1:1" id="36g-xP-ZRD"/>
-                            <constraint firstItem="RXS-NM-baC" firstAttribute="leading" secondItem="ghj-0p-b23" secondAttribute="leading" constant="17.5" id="ILl-cw-DMz"/>
-                            <constraint firstItem="RXS-NM-baC" firstAttribute="centerX" secondItem="ghj-0p-b23" secondAttribute="centerX" id="biL-l4-SoP"/>
+                            <constraint firstItem="RXS-NM-baC" firstAttribute="centerX" secondItem="ghj-0p-b23" secondAttribute="centerX" id="Emr-9f-HC2"/>
+                            <constraint firstItem="RXS-NM-baC" firstAttribute="centerY" secondItem="ghj-0p-b23" secondAttribute="centerY" id="KQ8-kI-XAN"/>
                             <constraint firstItem="RXS-NM-baC" firstAttribute="top" secondItem="ghj-0p-b23" secondAttribute="top" constant="20.5" id="cCQ-YN-gg9"/>
                             <constraint firstItem="RXS-NM-baC" firstAttribute="centerY" secondItem="ghj-0p-b23" secondAttribute="centerY" id="jfL-UA-ZFM"/>
                         </constraints>

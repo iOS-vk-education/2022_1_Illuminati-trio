@@ -93,11 +93,13 @@ extension aboutViewControler: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         guard MFMailComposeViewController.canSendMail() else {
             return
         }
         let composer = MFMailComposeViewController()
-        composer.overrideUserInterfaceStyle = self.overrideUserInterfaceStyle
+        
+        composer.overrideUserInterfaceStyle = tabBarController!.overrideUserInterfaceStyle
         composer.mailComposeDelegate = self
         composer.setToRecipients(["kosov11@gmail.com"])
         composer.setSubject("EGEKit")
