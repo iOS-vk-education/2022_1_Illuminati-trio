@@ -14,10 +14,12 @@ final class DetailsViewController: UIViewController {
     private let presenter = DetailsPresenter()
     let banner = NotificationBannerView(frame: .zero)
     
+    private var heightUslovie: CGFloat = 0
     private let number: String
     private var htmlUslovie: String = ""
     private var htmlSolution: String = ""
-    private let solutionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50))
+    private let solutionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 260, height: 50))
+    private let hideButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
     private let activityIndicator = UIActivityIndicatorView(style: .large)
     lazy var isFav = presenter.isFavourite(with: number)
     
@@ -58,10 +60,7 @@ final class DetailsViewController: UIViewController {
         setupWebViews()
         setupButtons()
         
-        view.addSubview(activityIndicator)
-        view.addSubview(banner)
-        
-        [webViewUslovie,webViewSolution,solutionButton].forEach{
+        [webViewUslovie,webViewSolution,solutionButton,banner,activityIndicator,hideButton].forEach{
             self.view.addSubview($0)}
         
         banner.isHidden = true
@@ -95,10 +94,13 @@ final class DetailsViewController: UIViewController {
         solutionButton.pin
             .left(view.pin.safeArea.left + 5)
         
+        hideButton.pin
+            .left(view.pin.safeArea.left + 180)
+
         banner.pin
             .horizontally(10%)
             .height(48)
-            .bottom(view.safeAreaInsets.bottom)
+            .bottom(view.safeAreaInsets.bottom + 25)
     }
     @objc
     private func copyUrl() {
@@ -129,6 +131,9 @@ final class DetailsViewController: UIViewController {
                 
         solutionButton.configuration = setupSolButton()
         solutionButton.applyShadow(cornerRadius: 5)
+        
+        hideButton.configuration = setupHideButton()
+        
     }
     
     private func setupWebViews() {
@@ -176,6 +181,15 @@ final class DetailsViewController: UIViewController {
                 .sizeToFit()
             
             self.solutionButton.isHidden = false
+            
+            self.hideButton.pin
+                .below(of: self.webViewUslovie)
+                .marginTop(15)
+                .sizeToFit()
+            
+            self.hideButton.isHidden = false
+            
+            self.heightUslovie = self.view.pin.safeArea.top + height2
         }
     }
     
@@ -199,6 +213,34 @@ final class DetailsViewController: UIViewController {
         config.title = "Показать решение"
         config.baseBackgroundColor = .systemIndigo
         return config
+    }
+    
+    private func setupHideButton() -> UIButton.Configuration {
+        hideButton.isHidden = true
+        hideButton.addTarget(self, action: #selector(showUslovie),
+                                 for: .touchUpInside)
+        var config: UIButton.Configuration = .plain()
+        config.image = UIImage(systemName: "arrow.up.circle")
+        return config
+    }
+    
+    @objc
+    private func showUslovie() {
+        webViewUslovie.isHidden = !webViewUslovie.isHidden
+        if webViewUslovie.isHidden {
+            hideButton.setImage(UIImage(systemName: "arrow.down.circle"), for: .normal)
+            webViewUslovie.pin.height(self.view.pin.safeArea.top)
+            solutionButton.pin.top(view.pin.safeArea.top)
+            hideButton.pin.top(view.pin.safeArea.top)
+            webViewSolution.pin.top(view.pin.safeArea.top)
+        } else {
+            hideButton.setImage(UIImage(systemName: "arrow.up.circle"), for: .normal)
+
+            webViewUslovie.pin.height(heightUslovie)
+            solutionButton.pin.top(solutionButton.frame.height + heightUslovie)
+            hideButton.pin.top(hideButton.frame.height + heightUslovie)
+            webViewSolution.pin.top(webViewSolution.frame.height + heightUslovie)
+        }
     }
     
     @objc

@@ -60,9 +60,10 @@ class RegistrationViewController: UIViewController {
             
             NetworkManager.userEmail = (self?.email)!
             
-            UserDefaults.standard.set([], forKey: FavouriteManager.favouritesKey)
+//            UserDefaults.standard.set([], forKey: FavouriteManager.favouritesKey)
+            FavouriteManager.shared.eraseFavourites()
             
-            NotificationCenter.default.post(name: FavouriteManager.favouritesNotificationKey, object: nil)
+//            NotificationCenter.default.post(name: FavouriteManager.favouritesNotificationKey, object: nil)
             
             self?.dismiss(animated: true)
         }

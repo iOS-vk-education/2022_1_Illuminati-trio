@@ -45,7 +45,7 @@ class FavouriteViewController: UIViewController {
         titleOfScreen.font = .boldSystemFont(ofSize: 20)
         
         tableViewLabel.text = "Ваши любимые задачи"
-        tableViewLabel.textColor = .black
+        tableViewLabel.textColor = .label
         
         var config: UIButton.Configuration = .plain()
         config.title = "Очистить список"
@@ -71,6 +71,11 @@ class FavouriteViewController: UIViewController {
         presenter.viewController = self
         presenter.didLoadView()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        FavouriteManager.shared.getFavourites()
     }
     
     override func viewDidLayoutSubviews() {
